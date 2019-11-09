@@ -22,6 +22,8 @@ public class ImageReader {
       BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
       image = ImageIO.read(inputImage);
 
+
+
       // write the image to a file
       ImageIO.write(image, "jpg", new File(
               "images/my-logo.jpg"));
