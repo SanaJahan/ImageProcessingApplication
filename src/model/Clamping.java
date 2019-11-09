@@ -1,8 +1,10 @@
 package model;
 
+import java.awt.image.BufferedImage;
+
 public class Clamping implements IClamping {
   @Override
-  public void clampImage(ImageData data) {
-    
+  public void clampImage(BufferedImage data) {
+
   }
 }

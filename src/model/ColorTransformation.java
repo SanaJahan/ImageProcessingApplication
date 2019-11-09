@@ -1,14 +1,16 @@
 package model;
 
+import java.awt.image.BufferedImage;
+
 public class ColorTransformation implements IColorTransformation {
 
   @Override
-  public void applyGreyScale(ImageData imageData) {
+  public void applyGreyScale(BufferedImage imageData) {
 
   }
 
   @Override
-  public void applySepiaTone(ImageData imageData) {
+  public void applySepiaTone(BufferedImage imageData) {
 
   }
 }

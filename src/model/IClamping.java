@@ -1,6 +1,8 @@
 package model;
 
+import java.awt.image.BufferedImage;
+
 public interface IClamping {
 
-  void clampImage(ImageData data);
+  void clampImage(BufferedImage data);
 }
