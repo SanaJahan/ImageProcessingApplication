@@ -82,7 +82,7 @@ public class GenerateImageHelper {
     }
     g2d.dispose();
 
-    File file = new File("myimage.png");
+    File file = new File("checkerboard1.png");
     ImageIO.write(bufferedImage, "png", file);
   }
 
@@ -100,7 +100,7 @@ public class GenerateImageHelper {
     }
     g2d.dispose();
 
-    File file = new File("myimage.png");
+    File file = new File("checkerboard2.png");
     ImageIO.write(bufferedImage, "png", file);
   }
 
@@ -118,7 +118,7 @@ public class GenerateImageHelper {
     }
     g2d.dispose();
 
-    File file = new File("myimage.png");
+    File file = new File("checkerboard4.png");
     ImageIO.write(bufferedImage, "png", file);
   }
 }
