@@ -6,7 +6,7 @@ package model;
 public interface IBlur {
 
   /**
-   * method that implements the logic to apply the blur effect on any given image.
+   * Method that implements the logic to apply the blur effect on any given image.
    */
   int[][][] applyBlurringEffect();
 }

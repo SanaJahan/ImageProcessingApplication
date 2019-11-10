@@ -1,21 +1,29 @@
 package model;
 
-
-
+/**
+ * Generates a checkerboard image.
+ */
 public class GenerateCheckerBoard implements IGenerateCheckerBoard, IImage{
 
   private int squareSize;
   private int height;
   private int width;
 
+  /**
+   * Constructor that sets the height, width and square size of the checkerboard image.
+   * @param squareSize Size of each square in the checkerboard.
+   * @throws IllegalArgumentException Thrown at IllegalArgumentException.
+   */
   public GenerateCheckerBoard(int squareSize) throws IllegalArgumentException {
     this.squareSize = squareSize;
     this.height = squareSize * 8;
     this.width = squareSize * 8;
   }
 
-
-
+  /**
+   * Generates the checkerboard image.
+   * @return 3D matrix output.
+   */
   @Override
   public int[][][] generateCheckerBoard() {
     int[][][] rgb = new int[height][width][3];
@@ -38,16 +46,28 @@ public class GenerateCheckerBoard implements IGenerateCheckerBoard, IImage{
     return rgb;
   }
 
+  /**
+   * This will store the blur 3D matrix values into the ImageData rgb value.
+   * @return The final 3D matrix.
+   */
   @Override
   public int[][][] storeRGB() {
     return generateCheckerBoard();
   }
 
+  /**
+   * Stores the height of the image.
+   * @return Height.
+   */
   @Override
   public int getHeight() {
     return height;
   }
 
+  /**
+   * Stores the width of the image.
+   * @return Width.
+   */
   @Override
   public int getWidth() {
     return width;

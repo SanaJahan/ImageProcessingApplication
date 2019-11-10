@@ -10,11 +10,20 @@ public class FranceFlag extends ImageData implements IFlag {
           {255, 255, 255},
           {255, 0, 0}};
 
-
+  /**
+   * Constructor that calls the constructor of the ImageData class to set the rgb,height and width.
+   * @param height Height of the image.
+   * @param width Width of the image.
+   * @throws IllegalArgumentException Thrown at IllegalArgumentException.
+   */
   public FranceFlag(int width, int height) throws IllegalArgumentException {
     super(new int[height][width][3], height, width);
   }
 
+  /**
+   * Generates the Flag of France.
+   * @return 3D matrix output.
+   */
   @Override
   public int[][][] identifyFlag() {
     double ratio = 3 / 2;
@@ -38,6 +47,10 @@ public class FranceFlag extends ImageData implements IFlag {
     return france;
   }
 
+  /**
+   * This will store the blur 3D matrix values into the ImageData rgb value.
+   * @return The final 3D matrix.
+   */
   @Override
   public int[][][] storeRGB() {
     return identifyFlag();

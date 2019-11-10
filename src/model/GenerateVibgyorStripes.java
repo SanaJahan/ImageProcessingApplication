@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * Generates an image with the colors of the rainbow.
+ */
 public class GenerateVibgyorStripes extends ImageData implements IGenerateStripes {
 
   private boolean horizontal = false;
@@ -13,10 +16,20 @@ public class GenerateVibgyorStripes extends ImageData implements IGenerateStripe
           {75, 0, 130},
           {128, 0, 128}};
 
+  /**
+   * Constructor that calls the constructor of the ImageData class to set the rgb,height and width.
+   * @param height Height of the image.
+   * @param width Width of the image.
+   * @throws IllegalArgumentException Thrown at IllegalArgumentException.
+   */
   public GenerateVibgyorStripes(int height, int width) throws IllegalArgumentException {
     super(new int[height][width][3], height, width);
   }
 
+  /**
+   * Generates the rainbow colored image with horizontal stripes.
+   * @return 3D matrix output.
+   */
   @Override
   public int[][][] createHorizontalVIBGYOR() {
     horizontal = true;
@@ -43,6 +56,10 @@ public class GenerateVibgyorStripes extends ImageData implements IGenerateStripe
     return rgb;
   }
 
+  /**
+   * Generates the rainbow colored image with vertical stripes.
+   * @return 3D matrix output.
+   */
   @Override
   public int[][][] createVerticalVIBGYOR() {
     int stripeWidth = (int) Math.ceil((double) width / 7);
@@ -68,6 +85,10 @@ public class GenerateVibgyorStripes extends ImageData implements IGenerateStripe
     return rainbow;
   }
 
+  /**
+   * This will store the blur 3D matrix values into the ImageData rgb value.
+   * @return The final 3D matrix.
+   */
   @Override
   public int[][][] storeRGB() {
     return horizontal ? createHorizontalVIBGYOR() : createVerticalVIBGYOR();

@@ -17,6 +17,10 @@ public class SharpenImage extends ImageData implements ISharpen{
   }
 
 
+  /**
+   * This will store the blur 3D matrix values into the ImageData rgb value.
+   * @return The final 3D matrix.
+   */
   @Override
   public int[][][] storeRGB() {
     return applySharpeningEffect();

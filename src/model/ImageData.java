@@ -1,7 +1,9 @@
 package model;
 
+/**
+ * Abstract that sets the essential information of an image.
+ */
 public abstract class ImageData implements IImage {
-
 
   protected int height;
 
@@ -10,6 +12,14 @@ public abstract class ImageData implements IImage {
   protected int[][][] rgb;
 
 
+  /**
+   * Sets values for the width,height and rgb value given any kind of filter, color transformation,
+   * or image generation.
+   * @param rgb The pixel information of r,g and b as a 3D matrix.
+   * @param height Height of the image.
+   * @param width Width of the image.
+   * @throws IllegalArgumentException Thrown at IllegalArgumentException.
+   */
   public ImageData(int[][][] rgb, int height, int width) throws IllegalArgumentException {
 
     if (rgb == null) {
@@ -27,6 +37,10 @@ public abstract class ImageData implements IImage {
     this.width = width;
   }
 
+  /**
+   * Gets the height of the image that is getting altered.
+   * @return Height.
+   */
   public int getHeight() {
     return height;
   }
@@ -42,10 +56,20 @@ public abstract class ImageData implements IImage {
   }
 
 
+  /**
+   * For creating a new matrix to initialize the values of a new image.
+   * @param rgb Initial rgb matrix.
+   * @return Newly initialized matrix.
+   */
   protected int[][][] copyColors(int[][][] rgb) {
     return new int[rgb.length][rgb[0].length][3];
   }
 
+  /**
+   * For clamping or thresholding the pixels of the image.
+   * @param value The pixel to be checked against the threshold.
+   * @return The clamped pixel value.
+   */
   protected int clampValue(double value) {
     int intValue = (int) Math.round(value);
     if (intValue > 255) {
@@ -56,6 +80,11 @@ public abstract class ImageData implements IImage {
     return intValue;
   }
 
+  /**
+   * Uses the copyColor method and initializes the new rgb matrix by performing convolution.
+   * @param imageKernel The kernel used for convolution.
+   * @return New 3D rgb matrix.
+   */
   protected int[][][] initializeRGBValues(double[][] imageKernel) {
     double[][] kernel = imageKernel;
     double value;
@@ -88,6 +117,5 @@ public abstract class ImageData implements IImage {
     }
     return newRGB;
   }
-
 
 }

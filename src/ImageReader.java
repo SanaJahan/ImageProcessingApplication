@@ -17,6 +17,9 @@ import model.ISharpen;
 import model.SepiaTone;
 import model.SharpenImage;
 
+/**
+ * The main driver class that will perform the image transformation operations.
+ */
 public class ImageReader {
 
 
@@ -64,6 +67,11 @@ public class ImageReader {
   }
 
 
+  /**
+   * Reads and loads the image in consideration.
+   * @param image The image.
+   * @return 3D matrix output.
+   */
   private static int[][][] readImage(BufferedImage image) {
     if (image == null) {
       throw new IllegalArgumentException();
@@ -82,6 +90,13 @@ public class ImageReader {
 
   }
 
+  /**
+   * Writes the newly created image to a specified filepath.
+   * @param filePath Path to which the new image output is to be stored.
+   * @param rgb The rgb 3D matrix value.
+   * @param width Width of the image.
+   * @param height Height of the image.
+   */
   private static void writeImage(String filePath, int[][][] rgb, int width, int height) {
     try {
       BufferedImage output = new BufferedImage(
