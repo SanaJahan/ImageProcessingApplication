@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import model.BlurImage;
+import utility.FileTypeHelper;
 import model.FranceFlag;
 import model.GenerateCheckerBoard;
 import model.GenerateVibgyorStripes;
@@ -25,44 +26,53 @@ public class ImageReader {
 
   public static void main(String[] args) throws IOException {
     //read the file
-    File f = new File("ImageProcessingApplication/images/manhattan-small.png");
+    //File f = new File("ImageProcessingApplication/images/manhattan-small.png");
+    File f = new File("ImageProcessingApplication/images/sample1.jpg");
+
+    int dot = f.getName().indexOf('.') + 1;
+    String fileType = f.getName().substring(dot);
+    FileTypeHelper fileTypeHelper = new FileTypeHelper();
+    FileTypeHelper.FileType file = fileTypeHelper.chooseFileType(fileType);
+    String extension = "." + file.toString();
     BufferedImage image = ImageIO.read(f);
-    //String fileType = filePath.substring(filePath.lastIndexOf('.') + 1);
+
     //get the image
     int[][][] img = readImage(image);
+
     //create the blur effect
     IBlur blur = new BlurImage(img, image.getHeight(), image.getWidth());
     //write the file
-    writeImage("ImageProcessingApplication/images/blur.png", blur.applyBlurringEffect(), image.getWidth(), image.getHeight());
+    writeImage("ImageProcessingApplication/images/blur" + extension, blur.applyBlurringEffect(), image.getWidth(), image.getHeight());
 
     //create the sharpen effect
     ISharpen sharpen = new SharpenImage(img, image.getHeight(), image.getWidth());
-    writeImage("ImageProcessingApplication/images/sharpen.png", sharpen.applySharpeningEffect(), image.getWidth(), image.getHeight());
+    writeImage("ImageProcessingApplication/images/sharpen" + extension, sharpen.applySharpeningEffect(), image.getWidth(), image.getHeight());
 
     //create the grey scale effect
     GreyScale greyScale = new GreyScale(img, image.getHeight(), image.getWidth());
-    writeImage("ImageProcessingApplication/images/greyscale.png", greyScale.applyGrayScaleTransformation(), image.getWidth(), image.getHeight());
+    writeImage("ImageProcessingApplication/images/greyscale" + extension, greyScale.applyGrayScaleTransformation(), image.getWidth(), image.getHeight());
 
     //create the sepiatone effect
     SepiaTone sepiaTone = new SepiaTone(img, image.getHeight(), image.getWidth());
-    writeImage("ImageProcessingApplication/images/sepiatone.png", sepiaTone.applySepiaTransformation(), image.getWidth(), image.getHeight());
+    writeImage("ImageProcessingApplication/images/sepiatone" + extension, sepiaTone.applySepiaTransformation(), image.getWidth(), image.getHeight());
 
 
     // generate the checker board
     IGenerateCheckerBoard generateImage = new GenerateCheckerBoard(40);
-    writeImage("ImageProcessingApplication/images/checkerboard.png", generateImage.generateCheckerBoard(),
+    writeImage("ImageProcessingApplication/images/checkerboard" + extension, generateImage.generateCheckerBoard(),
             ((GenerateCheckerBoard) generateImage).getWidth(), ((GenerateCheckerBoard) generateImage).getHeight());
 
     //generate vibgyor horizontal
     GenerateVibgyorStripes vibgyorHorizontalStripes = new GenerateVibgyorStripes(500,400);
-    writeImage("ImageProcessingApplication/images/horizontal.png", vibgyorHorizontalStripes.createHorizontalVIBGYOR(), vibgyorHorizontalStripes.getWidth(),vibgyorHorizontalStripes.getHeight());
+    writeImage("ImageProcessingApplication/images/horizontal" + extension, vibgyorHorizontalStripes.createHorizontalVIBGYOR(), vibgyorHorizontalStripes.getWidth(),vibgyorHorizontalStripes.getHeight());
 
     //generate vibgyor vertical
     GenerateVibgyorStripes vibgyorVerticalStripes = new GenerateVibgyorStripes(500,400);
-    writeImage("ImageProcessingApplication/images/vertical.png", vibgyorVerticalStripes.createVerticalVIBGYOR(), vibgyorVerticalStripes.getWidth(),vibgyorVerticalStripes.getHeight());
+    writeImage("ImageProcessingApplication/images/vertical" + extension, vibgyorVerticalStripes.createVerticalVIBGYOR(), vibgyorVerticalStripes.getWidth(),vibgyorVerticalStripes.getHeight());
 
+    // generate the Flag of France
     FranceFlag franceFlag = new FranceFlag(300,200);
-    writeImage("ImageProcessingApplication/images/franceflag.png",franceFlag.identifyFlag(),franceFlag.getWidth(),franceFlag.getHeight());
+    writeImage("ImageProcessingApplication/images/franceflag" + extension,franceFlag.identifyFlag(),franceFlag.getWidth(),franceFlag.getHeight());
 
   }
 
