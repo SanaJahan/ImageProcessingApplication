@@ -21,39 +21,40 @@ public class GenerateImage implements IGenerateImage {
   @Override
   public void generateHorizontalRainbow(Scanner sc) throws IOException  {
     System.out.println("Rainbow Image with Horizontal Stripes");
-    System.out.println("Enter the width and height of the image:");
-    int width = sc.nextInt() + '\n';
-    int height = sc.nextInt() + '\n';
+    System.out.println("Enter the stripe thickness and total width of the image:");
+    int stripHeight = sc.nextInt() + '\n';
+    int totalWidth = sc.nextInt() + '\n';
+
     System.out.println("Enter the required Image Format:");
     //String format = sc.nextLine();
     String format = "jpg";
-    int stripeThickness = height / 7;
+    int totalHeight = stripHeight * 7;
 
-    BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+    BufferedImage bufferedImage = new BufferedImage(totalWidth, totalHeight, BufferedImage.TYPE_INT_RGB);
     Graphics2D g2d = bufferedImage.createGraphics();
 
     Color violet = new Color(147, 32,255);
     g2d.setColor(violet);
-    g2d.fillRect(0, 0, width, stripeThickness);
+    g2d.fillRect(0, 0, totalWidth, stripHeight);
 
     Color indigo = new Color(75, 55,255);
     g2d.setColor(indigo);
-    g2d.fillRect(0, stripeThickness, width, stripeThickness);
+    g2d.fillRect(0, stripHeight, totalWidth, stripHeight);
 
     g2d.setColor(Color.blue);
-    g2d.fillRect(0, stripeThickness * 2, width, stripeThickness);
+    g2d.fillRect(0, stripHeight * 2, totalWidth, stripHeight);
 
     g2d.setColor(Color.green);
-    g2d.fillRect(0, stripeThickness * 3, width, stripeThickness);
+    g2d.fillRect(0, stripHeight * 3, totalWidth, stripHeight);
 
     g2d.setColor(Color.yellow);
-    g2d.fillRect(0, stripeThickness * 4, width, stripeThickness);
+    g2d.fillRect(0, stripHeight * 4, totalWidth, stripHeight);
 
     g2d.setColor(Color.orange);
-    g2d.fillRect(0, stripeThickness * 5, width, stripeThickness);
+    g2d.fillRect(0, stripHeight * 5, totalWidth, stripHeight);
 
     g2d.setColor(Color.red);
-    g2d.fillRect(0, stripeThickness * 6, width, stripeThickness);
+    g2d.fillRect(0, stripHeight * 6, totalWidth, stripHeight);
 
     g2d.dispose();
 
@@ -75,38 +76,38 @@ public class GenerateImage implements IGenerateImage {
   public void generateVerticalRainbow(Scanner sc) throws IOException{
     System.out.println("Rainbow Image with Vertical Stripes ");
     System.out.println("Enter the width and height of the image:");
-    int width = sc.nextInt() + '\n';
-    int height = sc.nextInt() + '\n';
+    int stripWidth = sc.nextInt() + '\n';
+    int totalHeight = sc.nextInt() + '\n';
     System.out.println("Enter the required Image Format: ");
     //String format = sc.nextLine() + '\n';
     String format = "png";
-    int stripeThickness = height / 7;
+    int totalWidth = stripWidth * 7;
 
-    BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+    BufferedImage bufferedImage = new BufferedImage(totalWidth, totalHeight, BufferedImage.TYPE_INT_RGB);
     Graphics2D g2d = bufferedImage.createGraphics();
 
     Color violet = new Color(147, 32,255);
     g2d.setColor(violet);
-    g2d.fillRect(0, 0, stripeThickness, height);
+    g2d.fillRect(0, 0, stripWidth, totalHeight);
 
     Color indigo = new Color(75, 55,255);
     g2d.setColor(indigo);
-    g2d.fillRect(stripeThickness, 0, stripeThickness, height);
+    g2d.fillRect(stripWidth, 0, stripWidth, totalHeight);
 
     g2d.setColor(Color.blue);
-    g2d.fillRect(stripeThickness * 2, 0, stripeThickness, height);
+    g2d.fillRect(stripWidth * 2, 0, stripWidth, totalHeight);
 
     g2d.setColor(Color.green);
-    g2d.fillRect(stripeThickness * 3, 0, stripeThickness, height);
+    g2d.fillRect(stripWidth * 3, 0, stripWidth, totalHeight);
 
     g2d.setColor(Color.yellow);
-    g2d.fillRect(stripeThickness * 4, 0, stripeThickness, height);
+    g2d.fillRect(stripWidth * 4, 0, stripWidth, totalHeight);
 
     g2d.setColor(Color.orange);
-    g2d.fillRect(stripeThickness * 5, 0, stripeThickness, height);
+    g2d.fillRect(stripWidth * 5, 0, stripWidth, totalHeight);
 
     g2d.setColor(Color.red);
-    g2d.fillRect(stripeThickness * 6, 0, stripeThickness, height);
+    g2d.fillRect(stripWidth * 6, 0, stripWidth, totalHeight);
 
     g2d.dispose();
 
@@ -118,7 +119,6 @@ public class GenerateImage implements IGenerateImage {
       System.out.println("There is no such image format.");
     }
   }
-
 
   /**
    * Generates an image with checkerboard pattern.
@@ -147,8 +147,8 @@ public class GenerateImage implements IGenerateImage {
   public static void main(String[] args) throws IOException{
     GenerateImage g = new GenerateImage();
     Scanner sc = new Scanner(System.in);
-    //g.generateVerticalRainbow(sc);
+    g.generateVerticalRainbow(sc);
     //g.generateHorizontalRainbow(sc);
-    g.generateCheckerBoard(sc);
+    //g.generateCheckerBoard(sc);
   }
 }

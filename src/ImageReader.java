@@ -4,7 +4,9 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import model.ColorTransformation;
 import model.FilterImage;
+import model.IColorTransformation;
 import model.IFiltering;
 import model.ImageData;
 
@@ -16,9 +18,10 @@ public class ImageReader {
   public static void main(String[] args) {
 
     //read the file
-    readImage("images/test.png");
+    readImage("ImageProcessingApplication/images/sample1.jpg");
     //write the file
-    writeImage("images/my-logo.png");
+    writeImage("ImageProcessingApplication/images/sample1output.jpg");
+
   }
 
 
@@ -26,7 +29,7 @@ public class ImageReader {
     imageData.setImage(image);
     if("jpg".equals(fileType)){
       imageData.setImgType(ImageData.ImageType.JPG);
-    }else{
+    } else{
       imageData.setImgType(ImageData.ImageType.PNG);
     }
     imageData.setWidth(image.getWidth());
@@ -43,20 +46,22 @@ public class ImageReader {
       BufferedImage image = ImageIO.read(f);
       String fileType = filePath.substring(filePath.lastIndexOf('.')+1);
       ImageData imageData = createImageData(image,fileType);
-      IFiltering filterImage = new FilterImage();
-      filterImage.applyBlurringEffect(imageData,3);
+//      IFiltering filterImage = new FilterImage();
+//      filterImage.applyBlurringEffect(imageData,3);
+      IColorTransformation c = new ColorTransformation();
+      c.applyGreyScale(imageData);
     }catch( IOException e){
       System.out.println("Error Occurred!\n"+e);
     }
   }
 
   public static void writeImage(String filePath){
-    try{
+    try {
       File f = new File(filePath);
-      String fileType = filePath.substring(filePath.lastIndexOf('.')+1);
+      String fileType = filePath.substring(filePath.lastIndexOf('.') + 1);
       ImageIO.write(imageData.getImage(), fileType, f);
-    }catch(IOException e){
-      System.out.println("Error Occurred!\n"+e);
+    } catch(IOException e){
+      System.out.println("Error Occurred!\n" + e);
     }
   }
 

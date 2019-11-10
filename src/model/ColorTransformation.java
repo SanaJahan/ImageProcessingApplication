@@ -1,8 +1,5 @@
 package model;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-
 /**
  * Contains methods used for performing Color Transformation operations, like grayscale and sepia,
  * on the image.
@@ -14,18 +11,23 @@ public class ColorTransformation implements IColorTransformation {
    * @param imageData Image in consideration.
    */
   @Override
-  public void applyGreyScale(BufferedImage imageData) {
-    if (imageData == null) {
-      return;
-    }
-    for (int i = 0; i < imageData.getHeight(); i++) {
-      for (int j = 0; j < imageData.getWidth(); j++) {
-        Color imageColor = new Color(imageData.getRGB(j, i));
-        int rgb = (int) (imageColor.getRed() * 0.2126)
-                + (int) (imageColor.getGreen() * 0.7152)
-                + (int) (imageColor.getBlue() * 0.0722);
-        Color newColor = new Color(rgb, rgb, rgb);
-        imageData.setRGB(j, i, newColor.getRGB());
+  public void applyGreyScale(ImageData imageData) {
+    for(int y = 0; y < imageData.getImageHeight(); y++){
+      for(int x = 0; x < imageData.getImageWidth(); x++) {
+        int p = imageData.getImage().getRGB(x, y);
+
+        int a = (p >> 24) & 0xff;
+        int r = (p >> 16) & 0xff;
+        int g = (p >> 8) & 0xff;
+        int b = p & 0xff;
+
+        //calculate average
+        int avg = (r + g + b) / 3;
+
+        //replace RGB value with avg
+        p = (a << 24) | (avg << 16) | (avg << 8) | avg;
+
+        imageData.getImage().setRGB(x, y, p);
       }
     }
   }
@@ -35,13 +37,13 @@ public class ColorTransformation implements IColorTransformation {
    * @param imageData Image in consideration.
    */
   @Override
-  public void applySepiaTone(BufferedImage imageData) {
-    int width = imageData.getWidth();
-    int height = imageData.getHeight();
+  public void applySepiaTone(ImageData imageData) {
+    int width = imageData.getImageWidth();
+    int height = imageData.getImageHeight();
 
     for (int y = 0; y < height; y++) {
       for (int x = 0; x < width; x++) {
-        int p = imageData.getRGB(x, y);
+        int p = imageData.getImage().getRGB(x, y);
 
         int a = (p >> 24) & 0xff;
         int r = (p >> 16) & 0xff;
@@ -75,9 +77,9 @@ public class ColorTransformation implements IColorTransformation {
         //set new RGB value
         p = (a << 24) | (r << 16) | (g << 8) | b;
 
-        imageData.setRGB(x, y, p);
+        imageData.getImage().setRGB(x, y, p);
       }
     }
   }
-
 }
+
