@@ -3,9 +3,16 @@ package model;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-
+/**
+ * Contains methods used for performing Color Transformation operations, like grayscale and sepia,
+ * on the image.
+ */
 public class ColorTransformation implements IColorTransformation {
 
+  /**
+   * Converts image to grayscale.
+   * @param imageData Image in consideration.
+   */
   @Override
   public void applyGreyScale(BufferedImage imageData) {
     if (imageData == null) {
@@ -23,6 +30,10 @@ public class ColorTransformation implements IColorTransformation {
     }
   }
 
+  /**
+   * Converts image to sepia tone.
+   * @param imageData Image in consideration.
+   */
   @Override
   public void applySepiaTone(BufferedImage imageData) {
     int width = imageData.getWidth();
