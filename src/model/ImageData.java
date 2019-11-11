@@ -85,8 +85,8 @@ public abstract class ImageData implements IImage {
    * @param imageKernel The kernel used for convolution.
    * @return New 3D rgb matrix.
    */
-  protected int[][][] initializeRGBValues(double[][] imageKernel) {
-    double[][] kernel = imageKernel;
+  protected int[][][] initializeRGBValues(float[][] imageKernel) {
+    float[][] kernel = imageKernel;
     double value;
     int num1;
     int num2;
@@ -104,7 +104,7 @@ public abstract class ImageData implements IImage {
               if (num1 < 0 || num2 < 0 || num1 >= height || num2 >= width) {
                 continue;
               } else {
-                value += kernel[a][b] * (double) rgb[num1][num2][c];
+                value += kernel[a][b] * (float) rgb[num1][num2][c];
               }
               num2++;
             }

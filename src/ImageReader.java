@@ -26,7 +26,6 @@ public class ImageReader {
 
   public static void main(String[] args) throws IOException {
     //read the file
-    //File f = new File("ImageProcessingApplication/images/manhattan-small.png");
     File f = new File("ImageProcessingApplication/images/sample1.jpg");
 
     int dot = f.getName().indexOf('.') + 1;

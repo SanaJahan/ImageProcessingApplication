@@ -28,7 +28,7 @@ public abstract class AbstractColorTransformation extends ImageData {
     for (int c = 0; c < 3; c++) {
       for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
-          double value = (sepiaTone[c][0] * rgb[i][j][0]) + (sepiaTone[c][1] * rgb[i][j][1])
+          float value = (sepiaTone[c][0] * rgb[i][j][0]) + (sepiaTone[c][1] * rgb[i][j][1])
                   + (sepiaTone[c][2] * rgb[i][j][2]);
           output[i][j][c] = clampValue(value);
         }
@@ -49,7 +49,7 @@ public abstract class AbstractColorTransformation extends ImageData {
     for (int c = 0; c < 3; c++) {
       for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
-          double value = (grayScale[c][0] * rgb[i][j][0]) + (grayScale[c][1] * rgb[i][j][1])
+          float value = (grayScale[c][0] * rgb[i][j][0]) + (grayScale[c][1] * rgb[i][j][1])
                   + (grayScale[c][2] * rgb[i][j][2]);
           output[i][j][c] = clampValue(value);
         }

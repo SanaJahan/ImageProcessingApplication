@@ -21,7 +21,7 @@ public class BlurImage extends ImageData implements IBlur {
    * @return The 3D matrix output.
    */
   public int[][][] applyBlurringEffect() {
-    double[][] blurKernel = {{1.0f/16.0f, 1.0f/8.0f, 1.0f/16.0f},
+    float[][] blurKernel = {{1.0f/16.0f, 1.0f/8.0f, 1.0f/16.0f},
             {1.0f/8.0f, 1.0f/4.0f, 1.0f/8.0f},
             {1.0f/16.0f, 1.0f/8.0f, 1.0f/16.0f}};
     return initializeRGBValues(blurKernel);
