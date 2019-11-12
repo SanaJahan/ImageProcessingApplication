@@ -12,7 +12,7 @@ public abstract class AbstractColorTransformation extends ImageData {
    * @param width Width of the image.
    * @throws IllegalArgumentException Thrown at IllegalArgumentException.
    */
-  public AbstractColorTransformation(int[][][] rgb, int height, int width) throws IllegalArgumentException {
+  protected AbstractColorTransformation(int[][][] rgb, int height, int width) throws IllegalArgumentException {
     super(rgb, height, width);
   }
 

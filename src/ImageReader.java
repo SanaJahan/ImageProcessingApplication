@@ -7,6 +7,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import model.BlurImage;
+import model.GreeceFlag;
+import model.SwitzerlandFlag;
 import utility.FileTypeHelper;
 import model.FranceFlag;
 import model.GenerateCheckerBoard;
@@ -26,7 +28,6 @@ public class ImageReader {
 
   public static void main(String[] args) throws IOException {
     //read the file
-    //File f = new File("ImageProcessingApplication/images/manhattan-small.png");
     File f = new File("ImageProcessingApplication/res/cat.png");
     String originalLocation = "ImageProcessingApplication/res/";
 
@@ -42,20 +43,25 @@ public class ImageReader {
 
     //create the blur effect
     IBlur blur = new BlurImage(img, image.getHeight(), image.getWidth());
+
     //write the file
-    writeImage(originalLocation + "blur" + extension, blur.applyBlurringEffect(), image.getWidth(), image.getHeight());
+    writeImage(originalLocation + "blur" + extension, blur.applyBlurringEffect(),
+            image.getWidth(), image.getHeight());
 
     //create the sharpen effect
     ISharpen sharpen = new SharpenImage(img, image.getHeight(), image.getWidth());
-    writeImage(originalLocation + "sharpen" + extension, sharpen.applySharpeningEffect(), image.getWidth(), image.getHeight());
+    writeImage(originalLocation + "sharpen" + extension, sharpen.applySharpeningEffect(),
+            image.getWidth(), image.getHeight());
 
     //create the grey scale effect
     GreyScale greyScale = new GreyScale(img, image.getHeight(), image.getWidth());
-    writeImage(originalLocation + "greyscale" + extension, greyScale.applyGrayScaleTransformation(), image.getWidth(), image.getHeight());
+    writeImage(originalLocation + "greyscale" + extension, greyScale.applyGrayScaleTransformation(),
+            image.getWidth(), image.getHeight());
 
     //create the sepiatone effect
     SepiaTone sepiaTone = new SepiaTone(img, image.getHeight(), image.getWidth());
-    writeImage(originalLocation + "sepiatone" + extension, sepiaTone.applySepiaTransformation(), image.getWidth(), image.getHeight());
+    writeImage(originalLocation + "sepiatone" + extension, sepiaTone.applySepiaTransformation(),
+            image.getWidth(), image.getHeight());
 
 
     // generate the checker board
@@ -65,15 +71,28 @@ public class ImageReader {
 
     //generate vibgyor horizontal
     GenerateVibgyorStripes vibgyorHorizontalStripes = new GenerateVibgyorStripes(500,400);
-    writeImage(originalLocation + "horizontal" + extension, vibgyorHorizontalStripes.createHorizontalVIBGYOR(), vibgyorHorizontalStripes.getWidth(),vibgyorHorizontalStripes.getHeight());
+    writeImage(originalLocation + "horizontal" + extension, vibgyorHorizontalStripes.createHorizontalVIBGYOR(),
+            vibgyorHorizontalStripes.getWidth(),vibgyorHorizontalStripes.getHeight());
 
     //generate vibgyor vertical
     GenerateVibgyorStripes vibgyorVerticalStripes = new GenerateVibgyorStripes(500,400);
-    writeImage(originalLocation + "vertical" + extension, vibgyorVerticalStripes.createVerticalVIBGYOR(), vibgyorVerticalStripes.getWidth(),vibgyorVerticalStripes.getHeight());
+    writeImage(originalLocation + "vertical" + extension, vibgyorVerticalStripes.createVerticalVIBGYOR(),
+            vibgyorVerticalStripes.getWidth(),vibgyorVerticalStripes.getHeight());
 
     // generate the Flag of France
     FranceFlag franceFlag = new FranceFlag(300,200);
-    writeImage(originalLocation + "franceflag" + extension,franceFlag.identifyFlag(),franceFlag.getWidth(),franceFlag.getHeight());
+    writeImage(originalLocation + "franceflag" + extension,franceFlag.identifyFlag(),
+            franceFlag.getWidth(),franceFlag.getHeight());
+
+    // generate the flag of greece
+    GreeceFlag greeceFlag = new GreeceFlag(300,200);
+    writeImage(originalLocation + "greeceflag" + extension,greeceFlag.identifyFlag(),
+            greeceFlag.getWidth(),greeceFlag.getHeight());
+
+    // generate switzerland flag
+    SwitzerlandFlag switzerlandFlag = new SwitzerlandFlag(300,200);
+    writeImage(originalLocation + "switzerlandlfag" + extension,switzerlandFlag.identifyFlag(),
+            switzerlandFlag.getWidth(),switzerlandFlag.getHeight());
 
   }
 

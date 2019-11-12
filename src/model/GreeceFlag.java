@@ -28,23 +28,23 @@ public class GreeceFlag extends ImageData implements IFlag {
       for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
           if (j <= stripeSize) {
-            rgb[j][i] = colorRGB[0];
+            this.greece[j][i] = colorRGB[0];
           } else if (j <= stripeSize * 2) {
-            rgb[j][i] = colorRGB[1];
+            this.greece[j][i] = colorRGB[1];
           } else if (j <= stripeSize * 3) {
-            rgb[j][i] = colorRGB[0];
+            this.greece[j][i] = colorRGB[0];
           } else if (j <= stripeSize * 4) {
-            rgb[j][i] = colorRGB[1];
+            this.greece[j][i] = colorRGB[1];
           } else if (j <= stripeSize * 5) {
-            rgb[j][i] = colorRGB[0];
+            this.greece[j][i] = colorRGB[0];
           } else if (j <= stripeSize * 6) {
-            rgb[j][i] = colorRGB[1];
+            this.greece[j][i] = colorRGB[1];
           } else if (j <= stripeSize * 7) {
-            rgb[j][i] = colorRGB[0];
+            this.greece[j][i] = colorRGB[0];
           } else if (j <= stripeSize * 8) {
-            rgb[j][i] = colorRGB[1];
+            this.greece[j][i] = colorRGB[1];
           } else {
-            rgb[j][i] = colorRGB[0];
+            this.greece[j][i] = colorRGB[0];
           }
         }
       }
@@ -53,9 +53,9 @@ public class GreeceFlag extends ImageData implements IFlag {
         for (int j = 0; j <= blueBorder; j++) {
           if ((i <= blueBorder || i >= cross - blueBorder)
                   && (j <= blueBorder || j >= blueBorder - blueBorder)) {
-            rgb[j][i] = colorRGB[0];
+            this.greece[j][i] = colorRGB[0];
           } else {
-            rgb[j][i] = colorRGB[1];
+            this.greece[j][i] = colorRGB[1];
           }
         }
       }
