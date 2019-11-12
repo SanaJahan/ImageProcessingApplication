@@ -8,6 +8,7 @@ This application can perform the following operations:
 6. Generate an image with a checkerboard pattern
 7. Generate the an image with the Flag of France
 
+
 To input the image to be transformed, go to the utility folder and go to the ImageReader file.  
 Under the main method, the first line of code would be to create a new File with the specified pathname.  
 This pathname can be altered to take any image path required, provided that the image has a format among png, jpg or bmp.  
