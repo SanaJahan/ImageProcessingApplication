@@ -8,7 +8,6 @@ import javax.imageio.ImageIO;
 
 import model.BlurImage;
 import model.GreeceFlag;
-import model.SwitzerlandFlag;
 import utility.FileTypeHelper;
 import model.FranceFlag;
 import model.GenerateCheckerBoard;
@@ -85,14 +84,10 @@ public class ImageReader {
             franceFlag.getWidth(),franceFlag.getHeight());
 
     // generate the flag of greece
-    GreeceFlag greeceFlag = new GreeceFlag(300,200);
+    GreeceFlag greeceFlag = new GreeceFlag(200,300);
     writeImage(originalLocation + "greeceflag" + extension,greeceFlag.identifyFlag(),
             greeceFlag.getWidth(),greeceFlag.getHeight());
 
-    // generate switzerland flag
-    SwitzerlandFlag switzerlandFlag = new SwitzerlandFlag(300,200);
-    writeImage(originalLocation + "switzerlandlfag" + extension,switzerlandFlag.identifyFlag(),
-            switzerlandFlag.getWidth(),switzerlandFlag.getHeight());
 
   }
 

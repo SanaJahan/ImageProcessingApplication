@@ -6,7 +6,7 @@ This application can perform the following operations:
 4. Apply sharpen filter on the image
 5. Generate a rainbow image with both horizontal and vertical stripes
 6. Generate an image with a checkerboard pattern
-7. Generate the an image with the Flag of France
+7. Generate the an image with the Flag of France and Flag of Greece.
 
 
 To input the image to be transformed, go to the utility folder and go to the ImageReader file.  

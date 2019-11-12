@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * Generates the image of the Flag of Greece.
+ */
 public class GreeceFlag extends ImageData implements IFlag {
 
   private int[][][] greece = new int[height][width][3];
@@ -18,9 +21,13 @@ public class GreeceFlag extends ImageData implements IFlag {
     super(new int[height][width][3], height, width);
   }
 
+  /**
+   * Generates the Flag of Greece.
+   * @return 3D matrix output.
+   */
   @Override
   public int[][][] identifyFlag() {
-    double ratio = 2 / 3;
+    double ratio = 3 / 2;
     if (width / height == ratio) {
       int stripeSize = (int) Math.ceil((double) height / 9);
       int blueBorder = stripeSize * 5;
@@ -51,8 +58,8 @@ public class GreeceFlag extends ImageData implements IFlag {
 
       for (int i = 0; i <= blueBorder; i++) {
         for (int j = 0; j <= blueBorder; j++) {
-          if ((i <= blueBorder || i >= cross - blueBorder)
-                  && (j <= blueBorder || j >= blueBorder - blueBorder)) {
+          if ((i <= cross || i >= blueBorder - cross)
+                  && (j <= cross || j >= blueBorder - cross)) {
             this.greece[j][i] = colorRGB[0];
           } else {
             this.greece[j][i] = colorRGB[1];
@@ -60,13 +67,16 @@ public class GreeceFlag extends ImageData implements IFlag {
         }
       }
 
-
     } else {
       throw new IllegalArgumentException();
     }
     return greece;
   }
 
+  /**
+   * This will store the blur 3D matrix values into the ImageData rgb value.
+   * @return The final 3D matrix.
+   */
   @Override
   public int[][][] storeRGB() {
     return identifyFlag();
