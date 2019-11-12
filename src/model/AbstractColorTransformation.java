@@ -38,13 +38,13 @@ public abstract class AbstractColorTransformation extends ImageData {
     return getOutput(grayScale);
   }
 
-  private int[][][] getOutput(float[][] grayScale) {
+  private int[][][] getOutput(float[][] transform) {
     int[][][] output = copyColors(rgb);
     for (int c = 0; c < 3; c++) {
       for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
-          float value = (grayScale[c][0] * rgb[i][j][0]) + (grayScale[c][1] * rgb[i][j][1])
-                  + (grayScale[c][2] * rgb[i][j][2]);
+          float value = (transform[c][0] * rgb[i][j][0]) + (transform[c][1] * rgb[i][j][1])
+                  + (transform[c][2] * rgb[i][j][2]);
           output[i][j][c] = clampValue(value);
         }
       }
