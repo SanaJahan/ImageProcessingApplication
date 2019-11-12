@@ -1,5 +1,4 @@
 # ImageProcessingApplication
-Work In Progress
 This application can perform the following operations:
 1. Convert image to gray scale
 2. Convert image to sepia tone
