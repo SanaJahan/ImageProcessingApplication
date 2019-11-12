@@ -17,5 +17,7 @@ The new images will be formed in the res directory.
 
 The images used in the application were airplane.png and cat.png taken from the website:  
 https://homepages.cae.wisc.edu/~ece533/images/ . 
+
+
 Both cat.png and airplane.png are owned by the website mentioned above. The website holds images soley meant for project work
 and testing.
