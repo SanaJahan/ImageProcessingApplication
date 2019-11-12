@@ -26,13 +26,15 @@ public class ImageReader {
 
   public static void main(String[] args) throws IOException {
     //read the file
-    File f = new File("ImageProcessingApplication/images/sample1.jpg");
+    //File f = new File("ImageProcessingApplication/images/manhattan-small.png");
+    File f = new File("ImageProcessingApplication/res/cat.png");
+    String originalLocation = "ImageProcessingApplication/res/";
 
     int dot = f.getName().indexOf('.') + 1;
     String fileType = f.getName().substring(dot);
     FileTypeHelper fileTypeHelper = new FileTypeHelper();
     FileTypeHelper.FileType file = fileTypeHelper.chooseFileType(fileType);
-    String extension = "." + file.toString();
+    String extension = "." + file.getFileType();
     BufferedImage image = ImageIO.read(f);
 
     //get the image
@@ -41,37 +43,37 @@ public class ImageReader {
     //create the blur effect
     IBlur blur = new BlurImage(img, image.getHeight(), image.getWidth());
     //write the file
-    writeImage("ImageProcessingApplication/images/blur" + extension, blur.applyBlurringEffect(), image.getWidth(), image.getHeight());
+    writeImage(originalLocation + "blur" + extension, blur.applyBlurringEffect(), image.getWidth(), image.getHeight());
 
     //create the sharpen effect
     ISharpen sharpen = new SharpenImage(img, image.getHeight(), image.getWidth());
-    writeImage("ImageProcessingApplication/images/sharpen" + extension, sharpen.applySharpeningEffect(), image.getWidth(), image.getHeight());
+    writeImage(originalLocation + "sharpen" + extension, sharpen.applySharpeningEffect(), image.getWidth(), image.getHeight());
 
     //create the grey scale effect
     GreyScale greyScale = new GreyScale(img, image.getHeight(), image.getWidth());
-    writeImage("ImageProcessingApplication/images/greyscale" + extension, greyScale.applyGrayScaleTransformation(), image.getWidth(), image.getHeight());
+    writeImage(originalLocation + "greyscale" + extension, greyScale.applyGrayScaleTransformation(), image.getWidth(), image.getHeight());
 
     //create the sepiatone effect
     SepiaTone sepiaTone = new SepiaTone(img, image.getHeight(), image.getWidth());
-    writeImage("ImageProcessingApplication/images/sepiatone" + extension, sepiaTone.applySepiaTransformation(), image.getWidth(), image.getHeight());
+    writeImage(originalLocation + "sepiatone" + extension, sepiaTone.applySepiaTransformation(), image.getWidth(), image.getHeight());
 
 
     // generate the checker board
     IGenerateCheckerBoard generateImage = new GenerateCheckerBoard(40);
-    writeImage("ImageProcessingApplication/images/checkerboard" + extension, generateImage.generateCheckerBoard(),
+    writeImage(originalLocation + "checkerboard" + extension, generateImage.generateCheckerBoard(),
             ((GenerateCheckerBoard) generateImage).getWidth(), ((GenerateCheckerBoard) generateImage).getHeight());
 
     //generate vibgyor horizontal
     GenerateVibgyorStripes vibgyorHorizontalStripes = new GenerateVibgyorStripes(500,400);
-    writeImage("ImageProcessingApplication/images/horizontal" + extension, vibgyorHorizontalStripes.createHorizontalVIBGYOR(), vibgyorHorizontalStripes.getWidth(),vibgyorHorizontalStripes.getHeight());
+    writeImage(originalLocation + "horizontal" + extension, vibgyorHorizontalStripes.createHorizontalVIBGYOR(), vibgyorHorizontalStripes.getWidth(),vibgyorHorizontalStripes.getHeight());
 
     //generate vibgyor vertical
     GenerateVibgyorStripes vibgyorVerticalStripes = new GenerateVibgyorStripes(500,400);
-    writeImage("ImageProcessingApplication/images/vertical" + extension, vibgyorVerticalStripes.createVerticalVIBGYOR(), vibgyorVerticalStripes.getWidth(),vibgyorVerticalStripes.getHeight());
+    writeImage(originalLocation + "vertical" + extension, vibgyorVerticalStripes.createVerticalVIBGYOR(), vibgyorVerticalStripes.getWidth(),vibgyorVerticalStripes.getHeight());
 
     // generate the Flag of France
     FranceFlag franceFlag = new FranceFlag(300,200);
-    writeImage("ImageProcessingApplication/images/franceflag" + extension,franceFlag.identifyFlag(),franceFlag.getWidth(),franceFlag.getHeight());
+    writeImage(originalLocation + "franceflag" + extension,franceFlag.identifyFlag(),franceFlag.getWidth(),franceFlag.getHeight());
 
   }
 
