@@ -2,6 +2,8 @@ package utility;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -15,7 +17,8 @@ public class ScriptHelper {
   /**
    *
    */
-  public int[][][] readImage(BufferedImage image) {
+  public int[][][] readImage(String term) throws IOException {
+    BufferedImage image = ImageIO.read(new FileInputStream("res/" + term));
     if (image == null) {
       throw new IllegalArgumentException();
     }

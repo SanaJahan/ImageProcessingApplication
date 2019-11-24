@@ -1,3 +1,6 @@
 load cat.png
-dither
-save cat-blur.png
+mosaic
+save abc-blur.png
+generate flag france 300 400
+generate checkerboard 40
+generate vibgyor horizontal

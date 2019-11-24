@@ -1,13 +1,10 @@
 package controller;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-import javax.imageio.ImageIO;
 
 import model.BlurImage;
 import model.DitherImage;
@@ -18,7 +15,7 @@ import model.SepiaTone;
 import model.SharpenImage;
 import utility.ScriptHelper;
 
-public class ImageController {
+public class FileController {
 
   private static int[][][] img = null;
   private static int height = -1;
@@ -46,8 +43,7 @@ public class ImageController {
     ScriptHelper scriptHelper = new ScriptHelper();
     switch (terms[0]) {
       case "load": {
-        BufferedImage input = ImageIO.read(new FileInputStream("res/" + terms[1]));
-        img = scriptHelper.readImage(input);
+        img = scriptHelper.readImage(terms[1]);
         height = scriptHelper.getHeight();
         width = scriptHelper.getWidth();
         break;
@@ -57,7 +53,8 @@ public class ImageController {
 
           case "flag": {
             switch (terms[2]) {
-              case "france":{}
+              case "france":{
+              }
             }
           }
 
