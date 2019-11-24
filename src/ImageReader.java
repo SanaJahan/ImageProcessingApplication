@@ -7,7 +7,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import model.BlurImage;
+import model.DitherImage;
 import model.GreeceFlag;
+import model.IImage;
+import model.MosaicImage;
 import utility.FileTypeHelper;
 import model.FranceFlag;
 import model.GenerateCheckerBoard;
@@ -32,7 +35,7 @@ public class ImageReader {
    */
   public static void main(String[] args) throws IOException {
     //read the file
-    File f = new File("ImageProcessingApplication/res/monarch.png");
+    File f = new File("ImageProcessingApplication/res/cat-min.png");
     String originalLocation = "ImageProcessingApplication/res/";
 
     int dot = f.getName().indexOf('.') + 1;
@@ -45,67 +48,73 @@ public class ImageReader {
     //get the image
     int[][][] img = readImage(image);
 
-    //create the blur effect
-    IBlur blur = new BlurImage(img, image.getHeight(), image.getWidth());
+//    //create the blur effect
+//    IBlur blur = new BlurImage(img, image.getHeight(), image.getWidth());
+//
+//    int[][][] result = blur.applyBlurringEffect();
+//    IBlur blur1 = new BlurImage(result, image.getHeight(), image.getWidth());
+//
+//
+//    //write the file
+//    writeImage(originalLocation + "blur" + extension, blur.applyBlurringEffect(),
+//            image.getWidth(), image.getHeight());
+//
+//    //create the sharpen effect
+//    ISharpen sharpen = new SharpenImage(img, image.getHeight(), image.getWidth());
+//    writeImage(originalLocation + "sharpen" + extension, sharpen.applySharpeningEffect(),
+//            image.getWidth(), image.getHeight());
+//
+//    //create the grey scale effect
+//    GreyScale greyScale = new GreyScale(img, image.getHeight(), image.getWidth());
+//    writeImage(originalLocation + "greyscale" + extension,
+//            greyScale.applyGrayScaleTransformation(),
+//            image.getWidth(), image.getHeight());
+//
+//    //create the sepiatone effect
+//    SepiaTone sepiaTone = new SepiaTone(img, image.getHeight(), image.getWidth());
+//    writeImage(originalLocation + "sepiatone" + extension,
+//            sepiaTone.applySepiaTransformation(),
+//            image.getWidth(), image.getHeight());
+//
+//
+//    // generate the checker board
+//    IGenerateCheckerBoard generateImage = new GenerateCheckerBoard(40);
+//    writeImage(originalLocation + "checkerboard" + extension,
+//            generateImage.generateCheckerBoard(),
+//            ((GenerateCheckerBoard) generateImage).getWidth(),
+//            ((GenerateCheckerBoard) generateImage).getHeight());
+//
+//    //generate vibgyor horizontal
+//    GenerateVibgyorStripes vibgyorHorizontalStripes =
+//            new GenerateVibgyorStripes(500,400);
+//    writeImage(originalLocation + "horizontal" + extension,
+//            vibgyorHorizontalStripes.createHorizontalVIBGYOR(),
+//            vibgyorHorizontalStripes.getWidth(),vibgyorHorizontalStripes.getHeight());
+//
+//    //generate vibgyor vertical
+//    GenerateVibgyorStripes vibgyorVerticalStripes =
+//            new GenerateVibgyorStripes(500,400);
+//    writeImage(originalLocation + "vertical" + extension,
+//            vibgyorVerticalStripes.createVerticalVIBGYOR(),
+//            vibgyorVerticalStripes.getWidth(),vibgyorVerticalStripes.getHeight());
+//
+//    // generate the Flag of France
+//    FranceFlag franceFlag = new FranceFlag(300,200);
+//    writeImage(originalLocation + "franceflag" + extension,franceFlag.identifyFlag(),
+//            franceFlag.getWidth(),franceFlag.getHeight());
+//
+//    // generate the flag of greece
+//    GreeceFlag greeceFlag = new GreeceFlag(200,300);
+//    writeImage(originalLocation + "greeceflag" + extension,greeceFlag.identifyFlag(),
+//            greeceFlag.getWidth(),greeceFlag.getHeight());
 
-    int[][][] result = blur.applyBlurringEffect();
-    IBlur blur1 = new BlurImage(result, image.getHeight(), image.getWidth());
-
-
-    //write the file
-    writeImage(originalLocation + "blur" + extension, blur.applyBlurringEffect(),
+    IImage mosaic = new MosaicImage(img, image.getHeight(), image.getWidth(),100);
+    writeImage(originalLocation + "mosaic" + extension, mosaic.storeRGB(),
             image.getWidth(), image.getHeight());
 
-    //create the sharpen effect
-    ISharpen sharpen = new SharpenImage(img, image.getHeight(), image.getWidth());
-    writeImage(originalLocation + "sharpen" + extension, sharpen.applySharpeningEffect(),
-            image.getWidth(), image.getHeight());
-
-    //create the grey scale effect
-    GreyScale greyScale = new GreyScale(img, image.getHeight(), image.getWidth());
-    writeImage(originalLocation + "greyscale" + extension,
-            greyScale.applyGrayScaleTransformation(),
-            image.getWidth(), image.getHeight());
-
-    //create the sepiatone effect
-    SepiaTone sepiaTone = new SepiaTone(img, image.getHeight(), image.getWidth());
-    writeImage(originalLocation + "sepiatone" + extension,
-            sepiaTone.applySepiaTransformation(),
-            image.getWidth(), image.getHeight());
-
-
-    // generate the checker board
-    IGenerateCheckerBoard generateImage = new GenerateCheckerBoard(40);
-    writeImage(originalLocation + "checkerboard" + extension,
-            generateImage.generateCheckerBoard(),
-            ((GenerateCheckerBoard) generateImage).getWidth(),
-            ((GenerateCheckerBoard) generateImage).getHeight());
-
-    //generate vibgyor horizontal
-    GenerateVibgyorStripes vibgyorHorizontalStripes =
-            new GenerateVibgyorStripes(500,400);
-    writeImage(originalLocation + "horizontal" + extension,
-            vibgyorHorizontalStripes.createHorizontalVIBGYOR(),
-            vibgyorHorizontalStripes.getWidth(),vibgyorHorizontalStripes.getHeight());
-
-    //generate vibgyor vertical
-    GenerateVibgyorStripes vibgyorVerticalStripes =
-            new GenerateVibgyorStripes(500,400);
-    writeImage(originalLocation + "vertical" + extension,
-            vibgyorVerticalStripes.createVerticalVIBGYOR(),
-            vibgyorVerticalStripes.getWidth(),vibgyorVerticalStripes.getHeight());
-
-    // generate the Flag of France
-    FranceFlag franceFlag = new FranceFlag(300,200);
-    writeImage(originalLocation + "franceflag" + extension,franceFlag.identifyFlag(),
-            franceFlag.getWidth(),franceFlag.getHeight());
-
-    // generate the flag of greece
-    GreeceFlag greeceFlag = new GreeceFlag(200,300);
-    writeImage(originalLocation + "greeceflag" + extension,greeceFlag.identifyFlag(),
-            greeceFlag.getWidth(),greeceFlag.getHeight());
-
-
+    /*IImage dither = new DitherImage(img, image.getHeight(), image.getWidth());
+    writeImage(originalLocation + "dither" + extension, dither.storeRGB(),
+            image.getWidth(), image.getHeight());*/
   }
 
 
