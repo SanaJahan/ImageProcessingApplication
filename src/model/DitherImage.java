@@ -1,6 +1,6 @@
 package model;
 
-public class DitherImage extends ImageData implements IDither {
+public class DitherImage extends ImageData {
   private GreyScale greyScale;
 
   /**
@@ -20,8 +20,7 @@ public class DitherImage extends ImageData implements IDither {
    * Performs dithering operation on the image after converting it into greyscale.
    * @return The dithered image.
    */
-  @Override
-  public int[][][] applyDitheringEffect() {
+  private int[][][] applyDitheringEffect() {
     int newColor;
     greyScale = new GreyScale(rgb,height,width);
     int[][][] greyscaleImage = greyScale.storeRGB();

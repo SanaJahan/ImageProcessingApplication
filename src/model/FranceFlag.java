@@ -3,7 +3,7 @@ package model;
 /**
  * Generates the image of the Flag of France.
  */
-public class FranceFlag extends ImageData implements IFlag {
+public class FranceFlag extends ImageData {
 
   private int[][][] france = new int[height][width][3];
   private int[][] colorRGB = {{0, 0, 204},
@@ -24,8 +24,7 @@ public class FranceFlag extends ImageData implements IFlag {
    * Generates the Flag of France.
    * @return 3D matrix output.
    */
-  @Override
-  public int[][][] identifyFlag() {
+  private int[][][] identifyFlag() {
     double ratio = 3 / 2;
     if (width / height == ratio ) {
       int stripeWidth = (int) Math.ceil((double) width / 3);

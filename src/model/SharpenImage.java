@@ -3,7 +3,7 @@ package model;
 /**
  * Class that imposes the sharpen filter on an image.
  */
-public class SharpenImage extends ImageData implements ISharpen {
+public class SharpenImage extends ImageData {
 
   /**
    * Constructor that calls the constructor of the ImageData class to set the rgb,height and width.
@@ -17,26 +17,16 @@ public class SharpenImage extends ImageData implements ISharpen {
   }
 
   /**
-   * Creates a sharpen filter to impose on the image.
-   * @return The 3D matrix output.
-   */
-  @Override
-  public int[][][] applySharpeningEffect() {
-    float[][] sharpen = {{-1.0f / 8.0f, -1.0f / 8.0f, -1.0f / 8.0f, -1.0f / 8.0f, -1.0f / 8.0f},
-      {-1.0f / 8.0f, 1.0f / 4.0f, 1.0f / 4.0f, 1.0f / 4.0f, -1.0f / 8.0f},
-      {-1.0f / 8.0f, 1.0f / 4.0f, 1.0f, 1.0f / 4.0f, -1.0f / 8.0f},
-      {-1.0f / 8.0f, 1.0f / 4.0f, 1.0f / 4.0f, 1.0f / 4.0f, -1.0f / 8.0f},
-      {-1.0f / 8.0f, -1.0f / 8.0f, -1.0f / 8.0f, -1.0f / 8.0f, -1.0f / 8.0f}};
-    return initializeRGBValues(sharpen);
-  }
-
-
-  /**
    * This will store the blur 3D matrix values into the ImageData rgb value.
    * @return The final 3D matrix.
    */
   @Override
   public int[][][] storeRGB() {
-    return applySharpeningEffect();
+    float[][] sharpen = {{-1.0f / 8.0f, -1.0f / 8.0f, -1.0f / 8.0f, -1.0f / 8.0f, -1.0f / 8.0f},
+            {-1.0f / 8.0f, 1.0f / 4.0f, 1.0f / 4.0f, 1.0f / 4.0f, -1.0f / 8.0f},
+            {-1.0f / 8.0f, 1.0f / 4.0f, 1.0f, 1.0f / 4.0f, -1.0f / 8.0f},
+            {-1.0f / 8.0f, 1.0f / 4.0f, 1.0f / 4.0f, 1.0f / 4.0f, -1.0f / 8.0f},
+            {-1.0f / 8.0f, -1.0f / 8.0f, -1.0f / 8.0f, -1.0f / 8.0f, -1.0f / 8.0f}};
+    return initializeRGBValues(sharpen);
   }
 }

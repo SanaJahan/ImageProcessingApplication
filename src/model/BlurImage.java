@@ -3,7 +3,7 @@ package model;
 /**
  * Class that imposes the blur filter on an image.
  */
-public class BlurImage extends ImageData implements IBlur {
+public class BlurImage extends ImageData {
 
   /**
    * Constructor that calls the constructor of the ImageData class to set the rgb,height and width.
@@ -20,7 +20,7 @@ public class BlurImage extends ImageData implements IBlur {
    * Creates a blur filter to impose on the image.
    * @return The 3D matrix output.
    */
-  public int[][][] applyBlurringEffect() {
+  private int[][][] applyBlurringEffect() {
     float[][] blurKernel = {{1.0f / 16.0f, 1.0f / 8.0f, 1.0f / 16.0f},
       {1.0f / 8.0f, 1.0f / 4.0f, 1.0f / 8.0f},
       {1.0f / 16.0f, 1.0f / 8.0f, 1.0f / 16.0f}};
