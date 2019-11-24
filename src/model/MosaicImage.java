@@ -16,6 +16,10 @@ public class MosaicImage extends ImageData {
   public MosaicImage(int[][][] rgb, int height, int width, int seeds) throws IllegalArgumentException {
     super(rgb, height, width);
     this.seeds = seeds;
+    if (seeds < 1 || height < 1 || width < 1) {
+      throw new IllegalArgumentException("Increase number of seeds or the height/ " +
+              "width of the image");
+    }
     this.cluster = new int[height][width];
   }
 

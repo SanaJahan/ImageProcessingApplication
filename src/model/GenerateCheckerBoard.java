@@ -18,6 +18,10 @@ public class GenerateCheckerBoard implements IImage {
     this.squareSize = squareSize;
     this.height = squareSize * 8;
     this.width = squareSize * 8;
+    if (squareSize < 1  || height < 1 || width < 1) {
+      throw new IllegalArgumentException("Height/Width of the image or the " +
+              "square size is too less");
+    }
   }
 
   /**

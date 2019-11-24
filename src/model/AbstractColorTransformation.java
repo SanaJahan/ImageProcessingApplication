@@ -17,9 +17,12 @@ public abstract class AbstractColorTransformation extends ImageData {
     super(rgb, height, width);
   }
 
-
-
-
+  /**
+   * Performs the convolution specific to the grayscale and sepia transformations without the,
+   * kernel.
+   * @param transform
+   * @return
+   */
   protected int[][][] getOutput(float[][] transform) {
     int[][][] output = initializeArray(rgb);
     for (int c = 0; c < 3; c++) {

@@ -14,6 +14,9 @@ public class BlurImage extends ImageData {
    */
   public BlurImage(int[][][] rgb, int height, int width) {
     super(rgb, height, width);
+    if (height < 1 || width < 1) {
+      throw new IllegalArgumentException("Height/Width of the image is too less");
+    }
   }
 
   /**

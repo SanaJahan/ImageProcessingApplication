@@ -23,6 +23,10 @@ import model.SepiaTone;
 import model.SharpenImage;
 import utility.ScriptHelper;
 
+/**
+ * Controller that handles the script provided by the user, and performs the respective operations,
+ * requested by them.
+ */
 public class ImageController {
 
   private static int[][][] img = null;
@@ -47,19 +51,34 @@ public class ImageController {
 
   }
 
+  /**
+   * Performs the operations requested by the user based on the lines given in the script.
+   * @param terms All possible request terms made by the user.
+   * @throws IOException Thrown at IOException.
+   */
   public static void processTerms(String[] terms) throws IOException {
     ScriptHelper scriptHelper = new ScriptHelper();
     switch (terms[0]) {
       case "load": {
+        //checks if there's something after load
+        if (terms.length < 2) {
+          throw new IllegalArgumentException("Add more arguments");
+        }
         BufferedImage input = ImageIO.read(new FileInputStream("res/" + terms[1]));
         img = scriptHelper.readImage(input);
         height = scriptHelper.getHeight();
         width = scriptHelper.getWidth();
         break;
       }
-      case "generate": {
-        switch (terms[1]) {
 
+      case "generate": {
+        if (terms.length < 5 && (terms[1] == "flag" || terms[1] == "vibgyor")) {
+          throw new IllegalArgumentException("Add more arguments");
+        }
+        if (terms.length < 4 && (terms[1] == "checkerboard")) {
+          throw new IllegalArgumentException("Add more arguments");
+        }
+        switch (terms[1]) {
           case "flag": {
             switch (terms[2]) {
               case "france": {
@@ -133,6 +152,9 @@ public class ImageController {
         break;
       }
       case "save": {
+        if (terms.length < 2) {
+          throw new IllegalArgumentException("Add more arguments");
+        }
         scriptHelper.writeImage("res/" + terms[1], img, width, height);
         break;
       }

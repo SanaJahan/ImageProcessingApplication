@@ -7,13 +7,17 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Contains methods to help in reading and writing the images when the operation is called by the,
+ * user in the script/text file.
+ */
 public class ScriptHelper {
 
   private int height;
   private int width;
 
   /**
-   *
+   *Reads the source image.
    */
   public int[][][] readImage(BufferedImage image) {
     if (image == null) {
@@ -35,6 +39,9 @@ public class ScriptHelper {
 
   }
 
+  /**
+   * Writes the target image.
+   */
   public void writeImage(String filePath, int[][][] rgb, int width, int height) {
     try {
       BufferedImage output = new BufferedImage(
@@ -58,10 +65,18 @@ public class ScriptHelper {
     }
   }
 
+  /**
+   * Gets the height of the image.
+   * @return Height of the image.
+   */
   public int getHeight() {
     return height;
   }
 
+  /**
+   * Gets the width of the image.
+   * @return Width of the image.
+   */
   public int getWidth() {
     return width;
   }

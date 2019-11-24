@@ -18,6 +18,9 @@ public class FranceFlag extends ImageData {
    */
   public FranceFlag(int width, int height) throws IllegalArgumentException {
     super(new int[height][width][3], height, width);
+    if (height < 1 || width < 1) {
+      throw new IllegalArgumentException("Height/Width of the image is too less");
+    }
   }
 
   /**
