@@ -1,4 +1,4 @@
-# ImageProcessingApplication
+# Image Processing Application
 This application can perform the following operations:
 1. Convert image to gray scale
 2. Convert image to sepia tone
@@ -7,7 +7,6 @@ This application can perform the following operations:
 5. Generate a rainbow image with both horizontal and vertical stripes
 6. Generate an image with a checkerboard pattern
 7. Generate the an image with the Flag of France and Flag of Greece.
-
 
 To input the image to be transformed, go to the utility folder and go to the ImageReader file.  
 Under the main method, the first line of code would be to create a new File with the specified pathname.  

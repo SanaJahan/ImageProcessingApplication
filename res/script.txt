@@ -1,0 +1,3 @@
+load cat.png
+mosaic
+save cat-blur.png

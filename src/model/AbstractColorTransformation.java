@@ -17,6 +17,9 @@ public abstract class AbstractColorTransformation extends ImageData {
     super(rgb, height, width);
   }
 
+
+
+
   protected int[][][] getOutput(float[][] transform) {
     int[][][] output = initializeArray(rgb);
     for (int c = 0; c < 3; c++) {
