@@ -16,7 +16,7 @@ public class MosaicImage extends ImageData{
       seedArray[i][0] = (int)(Math.random() * range * ) + min;
     }
   }
-  
+
 
 
   @Override
