@@ -3,7 +3,7 @@ package model;
 /**
  * Generates an image with the colors of the rainbow.
  */
-public class GenerateVibgyorStripes extends ImageData implements IGenerateStripes {
+public class GenerateVibgyorStripes extends ImageData implements IGenerateVibgyor{
 
   private boolean horizontal = false;
 

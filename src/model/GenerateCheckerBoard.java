@@ -3,7 +3,7 @@ package model;
 /**
  * Generates a checkerboard image.
  */
-public class GenerateCheckerBoard implements IGenerateCheckerBoard, IImage {
+public class GenerateCheckerBoard implements IImage {
 
   private int squareSize;
   private int height;
@@ -24,8 +24,7 @@ public class GenerateCheckerBoard implements IGenerateCheckerBoard, IImage {
    * Generates the checkerboard image.
    * @return 3D matrix output.
    */
-  @Override
-  public int[][][] generateCheckerBoard() {
+  private int[][][] generateCheckerBoard() {
     int[][][] rgb = new int[height][width][3];
 
     for (int i = 0; i < squareSize * 8; i++) {

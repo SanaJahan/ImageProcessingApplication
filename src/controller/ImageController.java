@@ -11,7 +11,12 @@ import javax.imageio.ImageIO;
 
 import model.BlurImage;
 import model.DitherImage;
+import model.FranceFlag;
+import model.GenerateCheckerBoard;
+import model.GenerateVibgyorStripes;
+import model.GreeceFlag;
 import model.GreyScale;
+import model.IGenerateVibgyor;
 import model.IImage;
 import model.MosaicImage;
 import model.SepiaTone;
@@ -57,14 +62,42 @@ public class ImageController {
 
           case "flag": {
             switch (terms[2]) {
-              case "france":{}
+              case "france": {
+                IImage france = new FranceFlag(Integer.parseInt(terms[3]),
+                        Integer.parseInt(terms[4]));
+                img = france.storeRGB();
+                break;
+              }
+              case "greece": {
+                IImage greece = new GreeceFlag(Integer.parseInt(terms[3]),
+                        Integer.parseInt(terms[4]));
+                img = greece.storeRGB();
+                break;
+              }
             }
           }
 
-          // If y == 3
-          case "vibgyor":
-            {}
-          case "checkerboard":{}
+          case "vibgyor": {
+            switch (terms[2]) {
+              case "horizontal": {
+                IGenerateVibgyor horizontal = new GenerateVibgyorStripes(Integer.parseInt(terms[3]),
+                        Integer.parseInt(terms[4]));
+                img = horizontal.createHorizontalVIBGYOR();
+                break;
+              }
+              case "vertical": {
+                IGenerateVibgyor vertical = new GenerateVibgyorStripes(Integer.parseInt(terms[3]),
+                        Integer.parseInt(terms[4]));
+                img = vertical.createVerticalVIBGYOR();
+                break;
+              }
+            }
+          }
+          case "checkerboard": {
+            IImage checkerboard = new GenerateCheckerBoard(Integer.parseInt(terms[3]));
+            img = checkerboard.storeRGB();
+            break;
+          }
         }
         break;
 
@@ -90,7 +123,7 @@ public class ImageController {
         break;
       }
       case "mosaic": {
-        IImage mosaicImage = new MosaicImage(img, height, width,8000);
+        IImage mosaicImage = new MosaicImage(img, height, width,Integer.parseInt(terms[1]));
         img = mosaicImage.storeRGB();
         break;
       }
