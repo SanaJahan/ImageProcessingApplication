@@ -25,24 +25,36 @@ public class DitherImage extends ImageData implements IDither {
     int newColor;
     greyScale = new GreyScale(rgb,height,width);
     int[][][] greyscaleImage = greyScale.storeRGB();
-    for (int y = 0; y < getHeight(); y++) {
-      for (int x = 0; x < getWidth(); x++) {
-        int oldColor = greyscaleImage[x][y][0]; //for red in this case
-        if (oldColor >= 127) {
-          newColor = 255;
-        }
-        else {
-          newColor = 0;
-        }
+    for (int x = 0; x < getHeight(); x++) {
+      for (int y = 0; y < getWidth(); y++) {
+        int oldColor = greyscaleImage[x][y][0];
+        newColor = Math.round(oldColor/255) * 255;
         int error = oldColor - newColor;
-        greyscaleImage[x][y][0] = greyscaleImage[newColor][newColor][newColor];
-        greyscaleImage[x + 1][y][0] = greyscaleImage[x+1][y][0] + (error * 7 / 16);
-        greyscaleImage[x - 1][y + 1][0] = greyscaleImage[x - 1][y + 1][0] + (error * 3 / 16);
-        greyscaleImage[x][y + 1][0] = greyscaleImage[x][y + 1][0] + (error * 5 / 16);
-        greyscaleImage[x + 1][y + 1][0] = greyscaleImage[x + 1][y + 1][0] + (error * 1 / 16);
+        for (int c = 0; c < 3; c++) {
+          greyscaleImage[x][y][c] = newColor;
+        }
+        if (y + 1 <= width - 1) {
+          for (int c = 0; c < 3; c++) {
+            greyscaleImage[x][y + 1][c] += ((7.0 / 16.0) * error);
+          }
+        }
+        if (x + 1 <= height - 1 && y - 1 >= 0) {
+          for (int c = 0; c < 3; c++) {
+            greyscaleImage[x + 1][y - 1][c] += ((3.0 / 16.0) * error);
+          }
+        }
+        if (x + 1 <= height - 1) {
+          for (int c = 0; c < 3; c++) {
+            greyscaleImage[x + 1][y][c] += ((5.0 / 16.0) * error);
+          }
+        }
+        if (x + 1 <= height - 1 && y + 1 <= width - 1) {
+          for (int c = 0; c < 3; c++) {
+            greyscaleImage[x + 1][y + 1][c] += ((1.0 / 16.0) * error);
+          }
+        }
       }
     }
-
     return greyscaleImage;
   }
 

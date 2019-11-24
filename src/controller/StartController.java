@@ -10,6 +10,7 @@ import java.util.Scanner;
 import javax.imageio.ImageIO;
 
 import model.BlurImage;
+import model.DitherImage;
 import model.GreyScale;
 import model.IBlur;
 import model.IImage;
@@ -56,14 +57,16 @@ public class StartController {
       case "generate": {
         switch (terms[1]) {
 
-          case "flag":
-            System.out.println(terms[2]);
-            break;
+          case "flag": {
+            switch (terms[2]) {
+              case "france":{}
+            }
+          }
 
           // If y == 3
           case "vibgyor":
-            System.out.println("vibgyor "+ terms[2]);
-            break;
+            {}
+          case "checkerboard":{}
         }
         break;
 
@@ -94,7 +97,8 @@ public class StartController {
         break;
       }
       case "dither": {
-        System.out.println("to be done");
+        IImage dither = new DitherImage(img,height,width);
+        img = dither.storeRGB();
         break;
       }
       case "save": {
