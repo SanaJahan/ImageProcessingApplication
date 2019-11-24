@@ -61,7 +61,7 @@ public abstract class ImageData implements IImage {
    * @param rgb Initial rgb matrix.
    * @return Newly initialized matrix.
    */
-  protected int[][][] copyColors(int[][][] rgb) {
+  protected int[][][] initializeArray(int[][][] rgb) {
     return new int[rgb.length][rgb[0].length][3];
   }
 
@@ -90,7 +90,7 @@ public abstract class ImageData implements IImage {
     double value;
     int num1;
     int num2;
-    int[][][] newRGB = copyColors(rgb);
+    int[][][] newRGB = initializeArray(rgb);
 
     int startIndex = (imageKernel.length - 1) / 2;
     for (int c = 0; c < 3; c++) {

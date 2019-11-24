@@ -7,8 +7,8 @@ public class FranceFlag extends ImageData implements IFlag {
 
   private int[][][] france = new int[height][width][3];
   private int[][] colorRGB = {{0, 0, 204},
-          {255, 255, 255},
-          {255, 0, 0}};
+    {255, 255, 255},
+    {255, 0, 0}};
 
   /**
    * Constructor that calls the constructor of the ImageData class to set the rgb,height and width.

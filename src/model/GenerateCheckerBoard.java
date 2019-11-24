@@ -3,7 +3,7 @@ package model;
 /**
  * Generates a checkerboard image.
  */
-public class GenerateCheckerBoard implements IGenerateCheckerBoard, IImage{
+public class GenerateCheckerBoard implements IGenerateCheckerBoard, IImage {
 
   private int squareSize;
   private int height;

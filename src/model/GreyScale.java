@@ -17,6 +17,17 @@ public class GreyScale extends AbstractColorTransformation {
   }
 
 
+
+  /**
+   * Converts image to Gray Scale.
+   * @return 3D matrix output.
+   */
+  public int[][][] applyGrayScaleTransformation() {
+    float[][] grayScale = {{0.2126f, 0.7152f, 0.0722f}, {0.2126f, 0.7152f, 0.0722f},
+            {0.2126f, 0.7152f, 0.0722f}};
+    return getOutput(grayScale);
+  }
+
   /**
    * This will store the blur 3D matrix values into the ImageData rgb value.
    * @return The final 3D matrix.

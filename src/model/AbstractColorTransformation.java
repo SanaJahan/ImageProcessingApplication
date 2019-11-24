@@ -12,34 +12,13 @@ public abstract class AbstractColorTransformation extends ImageData {
    * @param width Width of the image.
    * @throws IllegalArgumentException Thrown at IllegalArgumentException.
    */
-  protected AbstractColorTransformation(int[][][] rgb, int height, int width) throws IllegalArgumentException {
+  protected AbstractColorTransformation(int[][][] rgb, int height, int width)
+          throws IllegalArgumentException {
     super(rgb, height, width);
   }
 
-  /**
-   * Converts image to Sepia.
-   * @return 3D matrix output.
-   */
-  public int[][][] applySepiaTransformation() {
-    float[][] sepiaTone = {{0.393f, 0.769f, 0.189f},
-            {0.349f, 0.686f, 0.168f},
-            {0.272f, 0.534f, 0.131f}};
-    return getOutput(sepiaTone);
-  }
-
-  /**
-   * Converts image to Gray Scale.
-   * @return 3D matrix output.
-   */
-  public int[][][] applyGrayScaleTransformation() {
-    float[][] grayScale = {{0.2126f, 0.7152f, 0.0722f},
-            {0.2126f, 0.7152f, 0.0722f},
-            {0.2126f, 0.7152f, 0.0722f}};
-    return getOutput(grayScale);
-  }
-
-  private int[][][] getOutput(float[][] transform) {
-    int[][][] output = copyColors(rgb);
+  protected int[][][] getOutput(float[][] transform) {
+    int[][][] output = initializeArray(rgb);
     for (int c = 0; c < 3; c++) {
       for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {

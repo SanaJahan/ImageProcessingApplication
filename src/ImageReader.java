@@ -1,4 +1,4 @@
-import java.awt.*;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -25,9 +25,14 @@ import model.SharpenImage;
 public class ImageReader {
 
 
+  /**
+   * This is the main driver method that is to be run for the application to return results.
+   * @param args Main String args
+   * @throws IOException Thrown at IOException.
+   */
   public static void main(String[] args) throws IOException {
     //read the file
-    File f = new File("ImageProcessingApplication/res/cat.png");
+    File f = new File("ImageProcessingApplication/res/monarch.png");
     String originalLocation = "ImageProcessingApplication/res/";
 
     int dot = f.getName().indexOf('.') + 1;
@@ -43,6 +48,10 @@ public class ImageReader {
     //create the blur effect
     IBlur blur = new BlurImage(img, image.getHeight(), image.getWidth());
 
+    int[][][] result = blur.applyBlurringEffect();
+    IBlur blur1 = new BlurImage(result, image.getHeight(), image.getWidth());
+
+
     //write the file
     writeImage(originalLocation + "blur" + extension, blur.applyBlurringEffect(),
             image.getWidth(), image.getHeight());
@@ -54,28 +63,36 @@ public class ImageReader {
 
     //create the grey scale effect
     GreyScale greyScale = new GreyScale(img, image.getHeight(), image.getWidth());
-    writeImage(originalLocation + "greyscale" + extension, greyScale.applyGrayScaleTransformation(),
+    writeImage(originalLocation + "greyscale" + extension,
+            greyScale.applyGrayScaleTransformation(),
             image.getWidth(), image.getHeight());
 
     //create the sepiatone effect
     SepiaTone sepiaTone = new SepiaTone(img, image.getHeight(), image.getWidth());
-    writeImage(originalLocation + "sepiatone" + extension, sepiaTone.applySepiaTransformation(),
+    writeImage(originalLocation + "sepiatone" + extension,
+            sepiaTone.applySepiaTransformation(),
             image.getWidth(), image.getHeight());
 
 
     // generate the checker board
     IGenerateCheckerBoard generateImage = new GenerateCheckerBoard(40);
-    writeImage(originalLocation + "checkerboard" + extension, generateImage.generateCheckerBoard(),
-            ((GenerateCheckerBoard) generateImage).getWidth(), ((GenerateCheckerBoard) generateImage).getHeight());
+    writeImage(originalLocation + "checkerboard" + extension,
+            generateImage.generateCheckerBoard(),
+            ((GenerateCheckerBoard) generateImage).getWidth(),
+            ((GenerateCheckerBoard) generateImage).getHeight());
 
     //generate vibgyor horizontal
-    GenerateVibgyorStripes vibgyorHorizontalStripes = new GenerateVibgyorStripes(500,400);
-    writeImage(originalLocation + "horizontal" + extension, vibgyorHorizontalStripes.createHorizontalVIBGYOR(),
+    GenerateVibgyorStripes vibgyorHorizontalStripes =
+            new GenerateVibgyorStripes(500,400);
+    writeImage(originalLocation + "horizontal" + extension,
+            vibgyorHorizontalStripes.createHorizontalVIBGYOR(),
             vibgyorHorizontalStripes.getWidth(),vibgyorHorizontalStripes.getHeight());
 
     //generate vibgyor vertical
-    GenerateVibgyorStripes vibgyorVerticalStripes = new GenerateVibgyorStripes(500,400);
-    writeImage(originalLocation + "vertical" + extension, vibgyorVerticalStripes.createVerticalVIBGYOR(),
+    GenerateVibgyorStripes vibgyorVerticalStripes =
+            new GenerateVibgyorStripes(500,400);
+    writeImage(originalLocation + "vertical" + extension,
+            vibgyorVerticalStripes.createVerticalVIBGYOR(),
             vibgyorVerticalStripes.getWidth(),vibgyorVerticalStripes.getHeight());
 
     // generate the Flag of France

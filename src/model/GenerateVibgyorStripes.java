@@ -9,12 +9,12 @@ public class GenerateVibgyorStripes extends ImageData implements IGenerateStripe
 
   private int[][][] rainbow = new int[height][width][3];
   private int[][] colorRGB = {{255, 0, 0},
-          {255, 200, 0},
-          {255, 255, 0},
-          {0, 255, 0},
-          {0, 0, 255},
-          {75, 0, 130},
-          {128, 0, 128}};
+    {255, 200, 0},
+    {255, 255, 0},
+    {0, 255, 0},
+    {0, 0, 255},
+    {75, 0, 130},
+    {128, 0, 128}};
 
   /**
    * Constructor that calls the constructor of the ImageData class to set the rgb,height and width.

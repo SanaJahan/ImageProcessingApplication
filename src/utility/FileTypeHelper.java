@@ -26,7 +26,7 @@ public class FileTypeHelper {
       this.fileType = fileType;
     }
 
-    }
+  }
 
   /**
    * Helps select the file type.
@@ -34,7 +34,7 @@ public class FileTypeHelper {
    * @return the selected file type.
    */
   public FileType chooseFileType(String fileType) {
-    switch(fileType) {
+    switch (fileType) {
       case "png":
         return FileType.PNG;
       case "jpg":
