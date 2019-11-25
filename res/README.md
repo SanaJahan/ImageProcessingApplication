@@ -21,3 +21,9 @@ https://homepages.cae.wisc.edu/~ece533/images/ .
 
 Both cat.png and airplane.png are owned by the website mentioned above. The website holds images soley meant for project work
 and testing.
+
+*Part 2*
+
+Design changes: Removed the individual interfaces for each of the filtering, which was created keeping in mind that the future assignment could ask for more modifications or additions to any specific filtering or transformation models, as there was no need of these interfaces.
+
+
