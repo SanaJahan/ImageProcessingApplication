@@ -24,7 +24,8 @@ and testing.
 
 *Part 2*
 
-Design changes:
+<b>Design changes:</b>
+
 The individual interfaces for each of the image filters or transformations have been removed. There was no requirement of an interface for every operation. So a single interface, IImage, was created which could be used to perform the operations from each class.
 
 
