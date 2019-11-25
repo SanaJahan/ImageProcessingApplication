@@ -1,49 +1,121 @@
 package model;
 
-import java.util.Arrays;
-
 /**
- * image representation for the image processing applications.
+ * Abstract that sets the essential information of an image.
  */
-public final class ImageData {
-  private int width;
-  private int height;
-  private byte[] data;
+public abstract class ImageData implements IImage {
 
-  public ImageData(int width, int height, byte[] data) {
-    this.width = width;
+  protected int height;
+
+  protected int width;
+
+  protected int[][][] rgb;
+
+
+  /**
+   * Sets values for the width,height and rgb value given any kind of filter, color transformation,
+   * or image generation.
+   * @param rgb The pixel information of r,g and b as a 3D matrix.
+   * @param height Height of the image.
+   * @param width Width of the image.
+   * @throws IllegalArgumentException Thrown at IllegalArgumentException.
+   */
+  public ImageData(int[][][] rgb, int height, int width) throws IllegalArgumentException {
+
+    if (rgb == null) {
+      throw new IllegalArgumentException("Cannot take null parameters");
+    }
+    if (height <= 0) {
+      throw new IllegalArgumentException(" Height is too small");
+    }
+    if (width <= 0) {
+      throw new IllegalArgumentException(" Width is too small");
+    }
+
+    this.rgb = rgb;
     this.height = height;
-    this.data = data;
+    this.width = width;
   }
 
-  public int getWidth() {
-    return width;
-  }
-
+  /**
+   * Gets the height of the image that is getting altered.
+   * @return Height.
+   */
   public int getHeight() {
     return height;
   }
 
-  public byte[] getData() {
-    return data;
+  /**
+   * Public getter method takes in no arguments as parameters and returns the width of the image
+   * that is being altered.
+   *
+   * @return the width of the image as an int data type.
+   */
+  public int getWidth() {
+    return width;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (o == null || getClass() != o.getClass()) return false;
-    ImageData imageData = (ImageData) o;
 
-    if (width != imageData.width) return false;
-    if (height != imageData.height) return false;
-    return Arrays.equals(data, imageData.data);
-
+  /**
+   * For creating a new matrix to initialize the values of a new image.
+   * @param rgb Initial rgb matrix.
+   * @return Newly initialized matrix.
+   */
+  protected int[][][] initializeArray(int[][][] rgb) {
+    return new int[rgb.length][rgb[0].length][3];
   }
 
-  @Override
-  public int hashCode() {
-    int result = width;
-    result = 31 * result + height;
-    result = 31 * result + Arrays.hashCode(data);
-    return result;
+  /**
+   * For clamping or thresholding the pixels of the image.
+   * @param value The pixel to be checked against the threshold.
+   * @return The clamped pixel value.
+   */
+  protected int clampValue(double value) {
+    int intValue = (int) Math.round(value);
+    if (intValue > 255) {
+      intValue = 255;
+    } else if (intValue < 0) {
+      intValue = 0;
+    }
+    return intValue;
   }
+
+  /**
+   * Uses the copyColor method and initializes the new rgb matrix by performing convolution.
+   * @param imageKernel The kernel used for convolution.
+   * @return New 3D rgb matrix.
+   */
+  protected int[][][] initializeRGBValues(float[][] imageKernel) {
+    float[][] kernel = imageKernel;
+    double value;
+    int num1;
+    int num2;
+    int[][][] newRGB = initializeArray(rgb);
+
+    int startIndex = (imageKernel.length - 1) / 2;
+    for (int c = 0; c < 3; c++) {
+      for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+          value = 0;
+          num1 = i - startIndex;
+          num2 = j - startIndex;
+          for (int a = 0; a < imageKernel.length; a++) {
+            for (int b = 0; b < imageKernel.length; b++) {
+              if (num1 < 0 || num2 < 0 || num1 >= height || num2 >= width) {
+                continue;
+              } else {
+                value += kernel[a][b] * (float) rgb[num1][num2][c];
+              }
+              num2++;
+            }
+            num2 = j - startIndex;
+            num1++;
+          }
+          newRGB[i][j][c] = clampValue(value);
+        }
+      }
+    }
+    return newRGB;
+  }
+
 }
