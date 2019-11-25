@@ -40,6 +40,7 @@ public class FileController {
         processTerms(terms);
       }
     } catch (FileNotFoundException e) {
+      System.out.println(e.getMessage());
       System.out.println("File not found.");
     } catch (IOException e) {
       e.printStackTrace();
@@ -56,6 +57,7 @@ public class FileController {
     FileReaderHelper scriptHelper = new FileReaderHelper();
     switch (terms[0]) {
       case "load": {
+        System.out.println("Loading the image");
         img = scriptHelper.readImage(terms[1]);
         height = scriptHelper.getHeight();
         width = scriptHelper.getWidth();
@@ -146,6 +148,7 @@ public class FileController {
         break;
       }
       case "save": {
+        System.out.println("Saving your file");
         scriptHelper.writeImage("res/" + terms[1], img, width, height);
         break;
       }

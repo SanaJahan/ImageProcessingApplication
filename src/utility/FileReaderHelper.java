@@ -2,10 +2,12 @@ package utility;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
@@ -22,7 +24,8 @@ public class FileReaderHelper {
    *Reads the source image.
    */
   public int[][][] readImage(String term) throws IOException {
-    BufferedImage image = ImageIO.read(new FileInputStream("res/" + term));
+    ClassLoader classLoader = new FileReaderHelper().getClass().getClassLoader();
+    BufferedImage image = ImageIO.read(classLoader.getResource(term));
     if (image == null) {
       throw new IllegalArgumentException();
     }
