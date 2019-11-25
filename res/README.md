@@ -31,7 +31,9 @@ The individual interfaces for each of the image filters or transformations have 
 The FileHelper class has also been removed. It was created in order to support multiple image file types like png, jpg and bmp, in the main driver class of Version 1. Now that a controller handles script reading, there is no requirement of a driver class or the FileHelper class. The user can load the image and save the image with the image file type of their choice, in the script.
 
 The application now supports these additional features:
+
 8. Dithering of the image.
+
 9. Mosaic filter on the image.
 
 Two controllers have also been added to this version of the application. One controller is responsible for reading a file with the commands entered by a user. The input commands trigger the requested operation on the image and finally those images are saved to the res folder.
