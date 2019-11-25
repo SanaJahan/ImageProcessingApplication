@@ -48,30 +48,30 @@ The application currently supports any kind of file like text or bash files. The
 
 1. load to load the image to be transformed:
 
-Eg: load cat.png
+    Eg: load cat.png
 
 2. blur, dither, sepia, grayscale and sharpen are given as a single command:
 
-Eg: dither
+    Eg: dither
 
 3. mosaic is given along with the number of seeds required:
 
-Eg: mosaic 1000
+    Eg: mosaic 1000
 
 4. To generate a checkerboard image the square size is also mentioned:
 
-Eg: generate checkerboard 40
+    Eg: generate checkerboard 40
 
 5. To generate a rainbow image, the orientation along with the height and width are mentioned:
 
-Eg: generate vibgyor horizontal 500 400
+    Eg: generate vibgyor horizontal 500 400
 
 6. To generate either the France or Greece flag, the country name and the height and width of the image are mentioned:
 
-Eg: generate flag greece 200 300
+    Eg: generate flag greece 200 300
 
 7. save to save a new output image after the operations have been added:
 
-Eg: save greece-flag.png
+    Eg: save greece-flag.png
 
 
