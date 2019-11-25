@@ -1,4 +1,6 @@
 # Image Processing Application
+
+<b><i>Part 1</i></b>
 This application can perform the following operations:
 1. Convert image to gray scale
 2. Convert image to sepia tone
