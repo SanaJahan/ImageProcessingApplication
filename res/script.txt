@@ -1,2 +1,0 @@
-generate flag greece 5
-save vertical-r.png

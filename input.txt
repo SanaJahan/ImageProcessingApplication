@@ -1,0 +1,7 @@
+generate flag greece 200 300
+save greece-flag.png
+load cat.png
+dither
+mosaic
+save cat-dm.png
+
