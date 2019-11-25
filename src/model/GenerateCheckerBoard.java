@@ -12,7 +12,7 @@ public class GenerateCheckerBoard implements IImage {
   /**
    * Constructor that sets the height, width and square size of the checkerboard image.
    * @param squareSize Size of each square in the checkerboard.
-   * @throws IllegalArgumentException Thrown at IllegalArgumentException.
+   * @throws IllegalArgumentException thrown at IllegalArgumentException.
    */
   public GenerateCheckerBoard(int squareSize) throws IllegalArgumentException {
     this.squareSize = squareSize;

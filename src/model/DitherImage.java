@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * Performs dither operation on an image.
+ */
 public class DitherImage extends ImageData {
   private GreyScale greyScale;
 
@@ -60,6 +63,10 @@ public class DitherImage extends ImageData {
     return greyscaleImage;
   }
 
+  /**
+   * This will store the blur 3D matrix values into the ImageData rgb value.
+   * @return The final 3D matrix.
+   */
   @Override
   public int[][][] storeRGB() {
     return applyDitheringEffect();

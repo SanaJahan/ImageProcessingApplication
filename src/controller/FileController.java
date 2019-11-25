@@ -8,13 +8,22 @@ import java.util.Scanner;
 
 import model.BlurImage;
 import model.DitherImage;
+import model.FranceFlag;
+import model.GenerateCheckerBoard;
+import model.GenerateVibgyorStripes;
+import model.GreeceFlag;
 import model.GreyScale;
+import model.IGenerateVibgyor;
 import model.IImage;
 import model.MosaicImage;
 import model.SepiaTone;
 import model.SharpenImage;
 import utility.ScriptHelper;
 
+ /**
+ * Controller that handles the script provided by the user, and performs the respective operations,
+ * requested by them.
+ */
 public class FileController {
 
   private static int[][][] img = null;
@@ -39,6 +48,11 @@ public class FileController {
 
   }
 
+   /**
+    * Performs the operations requested by the user based on the lines given in the script.
+    * @param terms All possible request terms made by the user.
+    * @throws IOException Thrown at IOException.
+    */
   public static void processTerms(String[] terms) throws IOException {
     ScriptHelper scriptHelper = new ScriptHelper();
     switch (terms[0]) {
@@ -50,21 +64,56 @@ public class FileController {
       }
       case "generate": {
         switch (terms[1]) {
-
           case "flag": {
+            if (terms.length < 5 ) {
+              throw new IllegalArgumentException("Add more arguments");
+            }
+            height = Integer.parseInt(terms[3]);
+            width = Integer.parseInt(terms[4]);
             switch (terms[2]) {
-              case "france":{
+              case "france": {
+                IImage france = new FranceFlag(width,height);
+                img = france.storeRGB();
+                break;
+              }
+              case "greece": {
+                IImage greece = new GreeceFlag(height,width);
+                img = greece.storeRGB();
+                break;
               }
             }
+            break;
           }
-
-          // If y == 3
-          case "vibgyor":
-            {}
-          case "checkerboard":{}
+          case "vibgyor": {
+            if (terms.length < 5 ) {
+              throw new IllegalArgumentException("Add more arguments");
+            }
+            height = Integer.parseInt(terms[3]);
+            width = Integer.parseInt(terms[4]);
+            switch (terms[2]) {
+              case "horizontal": {
+                break;
+              }
+              case "vertical": {
+                GenerateVibgyorStripes vibgyorVerticalStripes =
+                        new GenerateVibgyorStripes(height,width);
+                img = vibgyorVerticalStripes.createHorizontalVIBGYOR();
+                break;
+              }
+            }
+            break;
+          }
+          case "checkerboard": {
+            int squareSize = Integer.parseInt(terms[3]);
+            if ( terms.length < 4 ) {
+              throw new IllegalArgumentException("Add more arguments");
+            }
+            IImage checkerboard = new GenerateCheckerBoard(squareSize);
+            img = checkerboard.storeRGB();
+            break;
+          }
         }
         break;
-
       }
       case "blur": {
         IImage blur = new BlurImage(img, height, width);
@@ -87,12 +136,12 @@ public class FileController {
         break;
       }
       case "mosaic": {
-        IImage mosaicImage = new MosaicImage(img, height, width,8000);
+        IImage mosaicImage = new MosaicImage(img, height, width, 8000);
         img = mosaicImage.storeRGB();
         break;
       }
       case "dither": {
-        IImage dither = new DitherImage(img,height,width);
+        IImage dither = new DitherImage(img, height, width);
         img = dither.storeRGB();
         break;
       }

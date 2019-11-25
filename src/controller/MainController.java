@@ -2,6 +2,14 @@ package controller;
 
 import java.util.Arrays;
 
+import model.GenerateVibgyorStripes;
+import utility.ScriptHelper;
+
+/**
+ * Controller for supporting the type of user interaction with this application through the,
+ * command line arguments.
+ * Currently, it only support any kind of file reading.
+ */
 public class MainController {
   public static void main(String[] args) {
     if (args == null || args.length == 0) {

@@ -1,6 +1,2 @@
-load cat.png
-mosaic
-save abc-blur.png
-generate flag france 300 400
-generate checkerboard 40
-generate vibgyor horizontal
+generate flag greece 5
+save vertical-r.png

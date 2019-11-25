@@ -23,14 +23,11 @@ public class GreeceFlag extends ImageData {
       throw new IllegalArgumentException("Height/Width of the image is too less");
     }
   }
-
-
   /**
-   * This will store the blur 3D matrix values into the ImageData rgb value.
-   * @return The final 3D matrix.
+   * Generates the Flag of Greece.
+   * @return 3D matrix output.
    */
-  @Override
-  public int[][][] storeRGB() {
+  private int[][][] identifyFlag() {
     double ratio = 3 / 2;
     if (width / height == ratio) {
       int stripeSize = (int) Math.ceil((double) height / 9);
@@ -75,5 +72,15 @@ public class GreeceFlag extends ImageData {
       throw new IllegalArgumentException();
     }
     return greece;
+  }
+
+
+  /**
+   * This will store the blur 3D matrix values into the ImageData rgb value.
+   * @return The final 3D matrix.
+   */
+  @Override
+  public int[][][] storeRGB() {
+    return identifyFlag();
   }
 }
