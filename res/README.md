@@ -22,7 +22,7 @@ https://homepages.cae.wisc.edu/~ece533/images/ .
 Both cat.png and airplane.png are owned by the website mentioned above. The website holds images soley meant for project work
 and testing.
 
-*Part 2*
+<b><i>Part 2</i></b>
 
 <b>Design changes:</b>
 
