@@ -103,8 +103,8 @@ public class FileController {
             break;
           }
           case "checkerboard": {
-            int squareSize = Integer.parseInt(terms[3]);
-            if ( terms.length < 4 ) {
+            int squareSize = Integer.parseInt(terms[2]);
+            if ( terms.length < 3 ) {
               throw new IllegalArgumentException("Add more arguments");
             }
             IImage checkerboard = new GenerateCheckerBoard(squareSize);
@@ -135,7 +135,8 @@ public class FileController {
         break;
       }
       case "mosaic": {
-        IImage mosaicImage = new MosaicImage(img, height, width, 8000);
+        int seeds = Integer.parseInt(terms[1]);
+        IImage mosaicImage = new MosaicImage(img, height, width, seeds);
         img = mosaicImage.storeRGB();
         break;
       }
