@@ -13,12 +13,11 @@ import model.GenerateCheckerBoard;
 import model.GenerateVibgyorStripes;
 import model.GreeceFlag;
 import model.GreyScale;
-import model.IGenerateVibgyor;
 import model.IImage;
 import model.MosaicImage;
 import model.SepiaTone;
 import model.SharpenImage;
-import utility.ScriptHelper;
+import utility.FileReaderHelper;
 
  /**
  * Controller that handles the script provided by the user, and performs the respective operations,
@@ -54,7 +53,7 @@ public class FileController {
     * @throws IOException Thrown at IOException.
     */
   public static void processTerms(String[] terms) throws IOException {
-    ScriptHelper scriptHelper = new ScriptHelper();
+    FileReaderHelper scriptHelper = new FileReaderHelper();
     switch (terms[0]) {
       case "load": {
         img = scriptHelper.readImage(terms[1]);

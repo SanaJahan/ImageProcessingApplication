@@ -2,9 +2,6 @@ package controller;
 
 import java.util.Arrays;
 
-import model.GenerateVibgyorStripes;
-import utility.ScriptHelper;
-
 /**
  * Controller for supporting the type of user interaction with this application through the,
  * command line arguments.

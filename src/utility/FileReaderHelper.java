@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
  * Contains methods to help in reading and writing the images when the operation is called by the,
  * user in the script/text file.
  */
-public class ScriptHelper {
+public class FileReaderHelper {
 
   private int height;
   private int width;
