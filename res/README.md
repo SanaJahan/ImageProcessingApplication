@@ -27,14 +27,7 @@ and testing.
 
 <b><i>Part 2</i></b>
 
-<b>Design changes:</b>
-
-The individual interfaces for each of the image filters or transformations have been removed. There was no requirement of an interface for every operation. So a single interface, IImage, was created which could be used to perform the operations from each class.
-
-
-The FileHelper class has also been removed. It was created in order to support multiple image file types like png, jpg and bmp, in the main driver class of Version 1. Now that a controller handles script reading, there is no requirement of a driver class or the FileHelper class. The user can load the image and save the image with the image file type of their choice, in the script.
-
-<b><font size = "24">To Run the Application:</font></b>
+<font size = "40"><b>To Run the Application:</b></font>
 
 Copy the input.txt file from the project folder and make changes if required.
 
@@ -42,6 +35,14 @@ Copy the input.txt file from the project folder and make changes if required.
     
  
 The output images will be stored in a folder called <b>res</b> in the same location from where the application is run.
+
+
+<b>Design changes:</b>
+
+The individual interfaces for each of the image filters or transformations have been removed. There was no requirement of an interface for every operation. So a single interface, IImage, was created which could be used to perform the operations from each class.
+
+
+The FileHelper class has also been removed. It was created in order to support multiple image file types like png, jpg and bmp, in the main driver class of Version 1. Now that a controller handles script reading, there is no requirement of a driver class or the FileHelper class. The user can load the image and save the image with the image file type of their choice, in the script.
 
 The application now supports these additional features:
 
