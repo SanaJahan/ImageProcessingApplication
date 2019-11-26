@@ -29,7 +29,7 @@ and testing.
 
 <font size = "40"><b>To Run the Application:</b></font>
 
-Copy the input.txt file from the project folder and make changes if required.
+An example of the script is given in the res folder, called "input.txt".
 
 <b>Add it to the folder from where you are running the application.</b>
     
