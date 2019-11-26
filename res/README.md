@@ -75,7 +75,8 @@ The application currently supports any kind of file like text or bash files. The
     Eg: save greece-flag.png
 
 
-#To Run the Application:
+<b>To Run the Application:<b>
+
 Copy the input.txt file from the project folder and make changes if required.
 
 <b>Add it to the folder from where you are running the application.<b>
