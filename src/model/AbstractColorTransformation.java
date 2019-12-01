@@ -20,8 +20,8 @@ public abstract class AbstractColorTransformation extends ImageData {
   /**
    * Performs the convolution specific to the grayscale and sepia transformations without the,
    * kernel.
-   * @param transform
-   * @return
+   * @param transform The image matrix that needs to undergo the transformation.
+   * @return The final output image.
    */
   protected int[][][] getOutput(float[][] transform) {
     int[][][] output = initializeArray(rgb);

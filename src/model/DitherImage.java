@@ -4,11 +4,10 @@ package model;
  * Performs dither operation on an image.
  */
 public class DitherImage extends ImageData {
-  private GreyScale greyScale;
 
   /**
-   * Sets values for the width,height and rgb value given any kind of filter, color transformation, or
-   * image generation.
+   * Sets values for the width,height and rgb value given any kind of filter, color transformation,
+   * or image generation.
    *
    * @param rgb    The pixel information of r,g and b as a 3D matrix.
    * @param height Height of the image.
@@ -28,12 +27,12 @@ public class DitherImage extends ImageData {
    */
   private int[][][] applyDitheringEffect() {
     int newColor;
-    greyScale = new GreyScale(rgb,height,width);
+    GreyScale greyScale = new GreyScale(rgb,height,width);
     int[][][] greyscaleImage = greyScale.storeRGB();
     for (int x = 0; x < getHeight(); x++) {
       for (int y = 0; y < getWidth(); y++) {
         int oldColor = greyscaleImage[x][y][0];
-        newColor = Math.round(oldColor/255) * 255;
+        newColor = Math.round(oldColor / 255) * 255;
         int error = oldColor - newColor;
         for (int c = 0; c < 3; c++) {
           greyscaleImage[x][y][c] = newColor;
