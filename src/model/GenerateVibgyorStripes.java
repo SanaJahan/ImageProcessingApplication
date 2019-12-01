@@ -3,9 +3,10 @@ package model;
 /**
  * Generates an image with the colors of the rainbow.
  */
-public class GenerateVibgyorStripes extends ImageData implements IGenerateVibgyor{
+public class GenerateVibgyorStripes extends ImageData {
 
   private boolean horizontal = false;
+  private String direction = "";
 
   private int[][][] rainbow = new int[height][width][3];
   private int[][] colorRGB = {{255, 0, 0},
@@ -22,10 +23,11 @@ public class GenerateVibgyorStripes extends ImageData implements IGenerateVibgyo
    * @param width Width of the image.
    * @throws IllegalArgumentException Thrown at IllegalArgumentException.
    */
-  public GenerateVibgyorStripes(int height, int width) throws IllegalArgumentException {
+  public GenerateVibgyorStripes(String direction,int height, int width) throws IllegalArgumentException {
     super(new int[height][width][3], height, width);
-    if (height < 1 || width < 1) {
-      throw new IllegalArgumentException("Height/Width of the image is too less");
+    this.direction = direction;
+    if(direction.equals("horizontal")){
+      this.horizontal = true;
     }
   }
 
@@ -33,8 +35,7 @@ public class GenerateVibgyorStripes extends ImageData implements IGenerateVibgyo
    * Generates the rainbow colored image with horizontal stripes.
    * @return 3D matrix output.
    */
-  @Override
-  public int[][][] createHorizontalVIBGYOR() {
+  private int[][][] createHorizontalVIBGYOR() {
     horizontal = true;
     int stripeWidth = (int) Math.ceil((double) height / 7);
     return createRainbow(stripeWidth);
@@ -44,8 +45,7 @@ public class GenerateVibgyorStripes extends ImageData implements IGenerateVibgyo
    * Generates the rainbow colored image with vertical stripes.
    * @return 3D matrix output.
    */
-  @Override
-  public int[][][] createVerticalVIBGYOR() {
+  private int[][][] createVerticalVIBGYOR() {
     int stripeWidth = (int) Math.ceil((double) width / 7);
     return createRainbow(stripeWidth);
   }

@@ -5,11 +5,11 @@ package model;
  */
 public abstract class ImageData implements IImage {
 
-  protected int height;
+  protected final int height;
 
-  protected int width;
+  protected final int width;
 
-  protected int[][][] rgb;
+  protected final int[][][] rgb;
 
 
   /**

@@ -23,6 +23,7 @@ public class GreeceFlag extends ImageData {
       throw new IllegalArgumentException("Height/Width of the image is too less");
     }
   }
+
   /**
    * Generates the Flag of Greece.
    * @return 3D matrix output.

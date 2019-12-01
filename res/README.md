@@ -27,6 +27,16 @@ and testing.
 
 <b><i>Part 2</i></b>
 
+<font size = "40"><b>To Run the Application:</b></font>
+
+An example of the script is given in the res folder, called "input.txt".
+
+<b>Add it to the folder from where you are running the application.</b>
+    
+ 
+The output images will be stored in a folder called <b>res</b> in the same location from where the application is run.
+
+
 <b>Design changes:</b>
 
 The individual interfaces for each of the image filters or transformations have been removed. There was no requirement of an interface for every operation. So a single interface, IImage, was created which could be used to perform the operations from each class.
@@ -73,5 +83,4 @@ The application currently supports any kind of file like text or bash files. The
 7. save to save a new output image after the operations have been added:
 
     Eg: save greece-flag.png
-
 

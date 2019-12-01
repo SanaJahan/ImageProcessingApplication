@@ -1,19 +1,16 @@
 package utility;
 
-import java.awt.*;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 
 /**
  * Contains methods to help in reading and writing the images when the operation is called by the,
  * user in the script/text file.
  */
-public class FileReaderHelper {
+public class ImageUtil {
 
   private int height;
   private int width;
@@ -22,7 +19,8 @@ public class FileReaderHelper {
    *Reads the source image.
    */
   public int[][][] readImage(String term) throws IOException {
-    BufferedImage image = ImageIO.read(new FileInputStream("res/" + term));
+    ClassLoader classLoader = new ImageUtil().getClass().getClassLoader();
+    BufferedImage image = ImageIO.read(classLoader.getResource(term));
     if (image == null) {
       throw new IllegalArgumentException();
     }
