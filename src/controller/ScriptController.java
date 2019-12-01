@@ -57,13 +57,13 @@ public class ScriptController {
    * @throws IOException Thrown at IOException.
    */
   public static void processTerms(String[] terms) throws IOException {
-    ImageUtil scriptHelper = new ImageUtil();
+    ImageUtil imageUtil = new ImageUtil();
     switch (terms[0]) {
       case "load": {
         System.out.println("Loading the image");
-        img = scriptHelper.readImage(terms[1]);
-        height = scriptHelper.getHeight();
-        width = scriptHelper.getWidth();
+        img = imageUtil.readImage(terms[1]);
+        height = imageUtil.getHeight();
+        width = imageUtil.getWidth();
         break;
       }
       case "generate": {
@@ -156,7 +156,7 @@ public class ScriptController {
       }
       case "save": {
         System.out.println("Saving your image");
-        scriptHelper.writeImage("res/" + terms[1], img, width, height);
+        imageUtil.writeImage("res/" + terms[1], img, width, height);
         break;
       }
       default:

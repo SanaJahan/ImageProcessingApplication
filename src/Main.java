@@ -26,8 +26,7 @@ public class Main {
       ScriptController scriptController = new ScriptController();
       scriptController.main(arr);
     } else if (args[0].equals("-interactive")) {
-      String[] arr = Arrays.copyOfRange(args, 1, args.length);
-      GUIController.main(arr);
+      GUIController controller = new GUIController();
     } else {
       System.out.println("Operation not supported");
     }
