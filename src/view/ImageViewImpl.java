@@ -3,6 +3,7 @@ package view;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -15,10 +16,11 @@ public class ImageViewImpl extends JFrame implements IImageView {
   private JLabel display;
   private JMenu load, generate;
   private JMenuBar menuBar;
+  private JLabel saveImage;
   private JPanel mainPanel = new JPanel();
   // Menu items
   private JMenuItem loadImg, hVibgyor, vVibgyor, checkerboard,franceFlag,greeceFlag;
-  private JButton blurBtn, ditherBtn, mosaicBtn, greyScaleBtn, sepiaBtn,sharpenBtn;
+  private JButton blurBtn, ditherBtn, mosaicBtn, greyScaleBtn, sepiaBtn,sharpenBtn,saveImageBtn;
   private String imgName;
 
 
@@ -60,28 +62,28 @@ public class ImageViewImpl extends JFrame implements IImageView {
       this.add(menuBar);
       this.add(mainPanel);
       // create all the buttons
-      blurBtn = new JButton();
+      blurBtn = new JButton("Blur");
       blurBtn.setActionCommand("blur");
 
-      greyScaleBtn = new JButton();
+      greyScaleBtn = new JButton("GreyScale");
       greyScaleBtn.setActionCommand("greyscale");
 
-      sepiaBtn = new JButton();
+      sepiaBtn = new JButton("Sepia");
       sepiaBtn.setActionCommand("sepia");
 
-      sharpenBtn = new JButton();
+      sharpenBtn = new JButton("Sharpen");
       sharpenBtn.setActionCommand("sharpen");
 
-      ditherBtn = new JButton();
+      ditherBtn = new JButton("Dither");
       ditherBtn.setActionCommand("dither");
 
-      mosaicBtn = new JButton();
+      mosaicBtn = new JButton("Mosaic");
       mosaicBtn.setActionCommand("mosaic");
 
-
+      saveImageBtn = new JButton("Save Image");
+      saveImageBtn.setActionCommand("save");
 
   }
-
 
 
   @Override
@@ -96,7 +98,14 @@ public class ImageViewImpl extends JFrame implements IImageView {
 
   @Override
   public void saveImage() {
-
+    JFileChooser fileChooser = new JFileChooser();
+    int option = fileChooser.showSaveDialog(ImageViewImpl.this);
+    if(option == JFileChooser.APPROVE_OPTION){
+      File file = fileChooser.getSelectedFile();
+      saveImage.setText("File Saved as: " + file.getName());
+    }else{
+      saveImage.setText("Save command canceled");
+    }
   }
 
   @Override
@@ -119,6 +128,7 @@ public class ImageViewImpl extends JFrame implements IImageView {
     this.add(sharpenBtn);
     this.add(ditherBtn);
     this.add(mosaicBtn);
+    this.add(saveImageBtn);
     this.setVisible(true);
     System.out.println("Image showed");
   }
@@ -132,6 +142,7 @@ public class ImageViewImpl extends JFrame implements IImageView {
     sharpenBtn.addActionListener(listener);
     ditherBtn.addActionListener(listener);
     mosaicBtn.addActionListener(listener);
+    saveImageBtn.addActionListener(listener);
   }
 
   }
