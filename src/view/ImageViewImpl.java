@@ -63,6 +63,23 @@ public class ImageViewImpl extends JFrame implements IImageView {
       blurBtn = new JButton();
       blurBtn.setActionCommand("blur");
 
+      greyScaleBtn = new JButton();
+      greyScaleBtn.setActionCommand("greyscale");
+
+      sepiaBtn = new JButton();
+      sepiaBtn.setActionCommand("sepia");
+
+      sharpenBtn = new JButton();
+      sharpenBtn.setActionCommand("sharpen");
+
+      ditherBtn = new JButton();
+      ditherBtn.setActionCommand("dither");
+
+      mosaicBtn = new JButton();
+      mosaicBtn.setActionCommand("mosaic");
+
+
+
   }
 
 
@@ -97,6 +114,11 @@ public class ImageViewImpl extends JFrame implements IImageView {
     mainPanel.add(pane);
     //create all the transform buttons
     this.add(blurBtn);
+    this.add(greyScaleBtn);
+    this.add(sepiaBtn);
+    this.add(sharpenBtn);
+    this.add(ditherBtn);
+    this.add(mosaicBtn);
     this.setVisible(true);
     System.out.println("Image showed");
   }
@@ -105,6 +127,11 @@ public class ImageViewImpl extends JFrame implements IImageView {
   public void setListener(ActionListener listener) {
     loadImg.addActionListener(listener);
     blurBtn.addActionListener(listener);
+    greyScaleBtn.addActionListener(listener);
+    sepiaBtn.addActionListener(listener);
+    sharpenBtn.addActionListener(listener);
+    ditherBtn.addActionListener(listener);
+    mosaicBtn.addActionListener(listener);
   }
 
   }
