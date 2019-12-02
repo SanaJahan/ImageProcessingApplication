@@ -1,13 +1,13 @@
 package view;
 
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public interface IImageView {
 
-  void loadImage();
-  void drawImage();
+  String drawImage() throws IOException;
   void saveImage();
-  void generateImage();
+  void generateImage(String input) throws IOException;
   void setListener(ActionListener listener);
 
-}
+  }
