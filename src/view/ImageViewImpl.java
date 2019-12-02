@@ -1,18 +1,25 @@
 package view;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import utility.ImageUtil;
 
 public class ImageViewImpl extends JFrame implements IImageView {
 
   private JLabel display;
-  private JMenu menu;
+  private JMenu load, generate;
   private JMenuBar menuBar;
+  private JPanel mainPanel = new JPanel();
   // Menu items
-  private JMenuItem m1, m2;
+  private JMenuItem loadImg, hVibgyor, vVibgyor, checkerboard,franceFlag,greeceFlag;
+  private JButton blurBtn, ditherBtn, mosaicBtn, greyScaleBtn, sepiaBtn,sharpenBtn;
+  private String imgName;
 
 
 
@@ -27,32 +34,46 @@ public class ImageViewImpl extends JFrame implements IImageView {
 
       //create the menu
        menuBar = new JMenuBar();
-       menu = new JMenu("Menu");
+       load = new JMenu("Load");
+       generate = new JMenu("Generate");
 
       // create menu items
-      m1 = new JMenuItem("load");
-      m1.setActionCommand("load");
-      m2 = new JMenuItem("generate");
+      loadImg = new JMenuItem("image");
+      loadImg.setActionCommand("load");
+      hVibgyor = new JMenuItem("Horizontal Vibgyor");
+      vVibgyor = new JMenuItem("Vertical Vibgyor");
+      checkerboard = new JMenuItem("Checkerboard");
+      franceFlag = new JMenuItem("France Flag");
+      greeceFlag = new JMenuItem("Greece Flag");
 
       // add menu items to menu
-      menu.add(m1);
-      menu.add(m2);
+      generate.add(hVibgyor);
+      generate.add(vVibgyor);
+      generate.add(checkerboard);
+      generate.add(franceFlag);
+      generate.add(greeceFlag);
+      load.add(loadImg);
 
       // add menu to menu bar
-      menuBar.add(menu);
+      menuBar.add(load);
+      menuBar.add(generate);
       this.add(menuBar);
-
-
-
-  }
-
-  @Override
-  public void loadImage() {
+      this.add(mainPanel);
+      // create all the buttons
+      blurBtn = new JButton();
+      blurBtn.setActionCommand("blur");
 
   }
 
+
+
   @Override
-  public void drawImage() {
+  public String drawImage() throws IOException {
+    this.setVisible(false);
+    this.imgName = JOptionPane.showInputDialog("Please input a value");
+    System.out.println(imgName);
+    displayImage(imgName);
+    return imgName;
 
   }
 
@@ -62,13 +83,28 @@ public class ImageViewImpl extends JFrame implements IImageView {
   }
 
   @Override
-  public void generateImage() {
+  public void generateImage(String input) throws IOException {
+    this.setVisible(false);
+    displayImage(input);
+  }
 
+  private void displayImage(String input) throws IOException {
+    ClassLoader classLoader = new ImageUtil().getClass().getClassLoader();
+    BufferedImage image = ImageIO.read(classLoader.getResource(input));
+    ImageIcon icon = new ImageIcon(image);
+    JLabel label = new JLabel(icon);
+    JScrollPane pane = new JScrollPane(label);
+    mainPanel.add(pane);
+    //create all the transform buttons
+    this.add(blurBtn);
+    this.setVisible(true);
+    System.out.println("Image showed");
   }
 
   @Override
   public void setListener(ActionListener listener) {
-    m1.addActionListener(listener);
+    loadImg.addActionListener(listener);
+    blurBtn.addActionListener(listener);
   }
 
-}
+  }
