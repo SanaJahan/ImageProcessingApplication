@@ -38,7 +38,27 @@ public class GenerateVibgyorStripes extends ImageData {
   private int[][][] createHorizontalVIBGYOR() {
     horizontal = true;
     int stripeWidth = (int) Math.ceil((double) height / 7);
-    return createRainbow(stripeWidth);
+    for (int i = 0; i < width; i++) {
+      for (int j = 0; j < height; j++) {
+        if (j <= stripeWidth) {
+          rgb[j][i] = colorRGB[0];
+        } else if (j <= stripeWidth * 2) {
+          rgb[j][i] = colorRGB[1];
+        } else if (j <= stripeWidth * 3) {
+          rgb[j][i] = colorRGB[2];
+        } else if (j <= stripeWidth * 4) {
+          rgb[j][i] = colorRGB[3];
+        } else if (j <= stripeWidth * 5) {
+          rgb[j][i] = colorRGB[4];
+        } else if (j <= stripeWidth * 6) {
+          rgb[j][i] = colorRGB[5];
+        } else {
+          rgb[j][i] = colorRGB[6];
+        }
+      }
+    }
+    return rgb;
+
   }
 
   /**
@@ -47,10 +67,6 @@ public class GenerateVibgyorStripes extends ImageData {
    */
   private int[][][] createVerticalVIBGYOR() {
     int stripeWidth = (int) Math.ceil((double) width / 7);
-    return createRainbow(stripeWidth);
-  }
-
-  private int[][][] createRainbow(int stripeWidth) {
     for (int i = 0; i < width; i++) {
       for (int j = 0; j < height; j++) {
         if (i <= stripeWidth) {
@@ -71,8 +87,8 @@ public class GenerateVibgyorStripes extends ImageData {
       }
     }
     return rainbow;
-  }
 
+  }
   /**
    * This will store the blur 3D matrix values into the ImageData rgb value.
    * @return The final 3D matrix.
