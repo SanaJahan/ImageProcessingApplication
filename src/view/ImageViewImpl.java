@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -97,16 +98,28 @@ public class ImageViewImpl extends JFrame implements IImageView {
   }
 
   @Override
-  public void saveImage() {
-    JFileChooser fileChooser = new JFileChooser();
-    int option = fileChooser.showSaveDialog(ImageViewImpl.this);
-    if(option == JFileChooser.APPROVE_OPTION){
-      File file = fileChooser.getSelectedFile();
-      saveImage.setText("File Saved as: " + file.getName());
-    }else{
-      saveImage.setText("Save command canceled");
+  public void saveImage(BufferedImage output,String filename,String ext) {
+    try {
+      if (ext == "png" || ext == "jpg" || ext == "bmp") {
+        filename = filename + "." + ext;
+      }
+      File outputFile = new File(filename);
+      ImageIO.write(output,ext,outputFile);
+
+      JFileChooser fileChooser = new JFileChooser();
+      int option = fileChooser.showSaveDialog(ImageViewImpl.this);
+      if(option == JFileChooser.APPROVE_OPTION){
+        fileChooser.setSelectedFile(outputFile);
+        saveImage.setText("File Saved as: " + outputFile.getName());
+      }else{
+        saveImage.setText("Save command canceled");
+      }
+    }
+    catch (IOException e) {
+      e.printStackTrace();
     }
   }
+
 
   @Override
   public void generateImage(String input) throws IOException {
@@ -145,4 +158,23 @@ public class ImageViewImpl extends JFrame implements IImageView {
     saveImageBtn.addActionListener(listener);
   }
 
+  @Override
+  public BufferedImage writeNewImage(int[][][] rgb, int width, int height) {
+      BufferedImage output = new BufferedImage(
+              width,
+              height,
+              BufferedImage.TYPE_INT_RGB);
+
+      for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+          int red = rgb[i][j][0];
+          int green = rgb[i][j][1];
+          int blue = rgb[i][j][2];
+          int color = (red << 16) + (green << 8) + blue;
+          output.setRGB(j, i, color);
+        }
+      }
+      return output;
   }
+
+}

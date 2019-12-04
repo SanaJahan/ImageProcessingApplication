@@ -24,6 +24,8 @@ public class GUIController implements ActionListener {
   private static int height = -1;
   private static int width = -1;
   private String imgName = "";
+  private BufferedImage output;
+
 
 
   public GUIController() {
@@ -53,8 +55,11 @@ public class GUIController implements ActionListener {
       }
       image = new BlurImage(img, height, width);
       img = image.storeRGB();
-        imgName = "blur-"+imgName;
-        imageUtil.writeImage("res/blur-"+imgName, img, width, height);
+      output = imageView.writeNewImage(img,width,height);
+
+      //imgName = "blur-"+imgName;
+      //imageUtil.writeImage("ImageProcessingApplication/res/"+"blur-"+imgName, img, width, height);
+
       try {
         imageView.generateImage(imgName);
       } catch (IOException ex) {
@@ -72,7 +77,7 @@ public class GUIController implements ActionListener {
       }
       image = new GreyScale(img, height, width);
       img = image.storeRGB();
-      imgName = "greyscale-"+imgName;
+      //imgName = "greyscale-"+imgName;
       imageUtil.writeImage("res/greyscale-"+imgName, img, width, height);
       try {
         imageView.generateImage(imgName);
@@ -91,7 +96,7 @@ public class GUIController implements ActionListener {
       }
       image = new SepiaTone(img, height, width);
       img = image.storeRGB();
-      imgName = "sepia-"+imgName;
+      //imgName = "sepia-"+imgName;
       imageUtil.writeImage("res/sepia-"+imgName, img, width, height);
       try {
         imageView.generateImage(imgName);
@@ -110,7 +115,7 @@ public class GUIController implements ActionListener {
       }
       image = new SharpenImage(img, height, width);
       img = image.storeRGB();
-      imgName = "sharpen-"+imgName;
+      //imgName = "sharpen-"+imgName;
       imageUtil.writeImage("res/sharpen-"+imgName, img, width, height);
       try {
         imageView.generateImage(imgName);
@@ -137,8 +142,17 @@ public class GUIController implements ActionListener {
         ex.printStackTrace();
       }
     }
-  }
-
-
+    if (e.getActionCommand().equals("save")) {
+      System.out.println("Saving the image");
+      try {
+        img = imageUtil.readImage(imgName);
+        height = imageUtil.getHeight();
+        width = imageUtil.getWidth();
+      } catch (IOException ex) {
+        ex.printStackTrace();
+      }
+      imageView.saveImage(output,);
+      }
+    }
 
 }
