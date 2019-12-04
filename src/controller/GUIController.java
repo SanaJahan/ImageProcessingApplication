@@ -1,63 +1,134 @@
 package controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import javax.swing.*;
+
 import model.BlurImage;
+import model.DitherImage;
+import model.GenerateCheckerBoard;
+import model.GenerateVibgyorStripes;
+import model.GreyScale;
 import model.IImage;
+import model.MosaicImage;
+import model.SepiaTone;
+import model.SharpenImage;
 import utility.ImageUtil;
-import view.IImageView;
 import view.ImageViewImpl;
 
-public class GUIController implements ActionListener {
-  private IImageView imageView;
-  private IImage image;
-  private ImageUtil imageUtil = new ImageUtil();
+public class GUIController  {
+
   private static int[][][] img = null;
   private static int height = -1;
   private static int width = -1;
-  private String imgName = "";
+  private ImageUtil imageUtil = new ImageUtil();
 
 
-  public GUIController() {
-    imageView = new ImageViewImpl();
-    imageView.setListener(this);
+
+
+  public static void main(String[] args) {
+    ImageViewImpl.setDefaultLookAndFeelDecorated(false);
+    ImageViewImpl imageViewFrame = new ImageViewImpl();
+
+    imageViewFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    imageViewFrame.setVisible(true);
+    try {
+      // Set cross-platform Java L&F (also called "Metal")
+      UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+    } catch (UnsupportedLookAndFeelException e) {
+      // handle exception
+      System.out.println("Unsupported feature");
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+
+
+  }
+
+  public void loadImage(String filename) throws IOException {
+    img = imageUtil.readImage(filename);
+    height = imageUtil.getHeight();
+    width = imageUtil.getWidth();
+
+  }
+
+  public void saveImage(String filePath) {
+    imageUtil.writeImage(filePath,img,width,height);
   }
 
 
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    if(e.getActionCommand().equals("load")) {
-      System.out.println("Loading the image");
-      try {
-        imgName = imageView.drawImage();
-      } catch (IOException ex) {
-        ex.printStackTrace();
+  public int[][][] applyEffect(String effect) {
+    switch (effect) {
+      case "blur": {
+        System.out.println("Applying blur to the image");
+        IImage blur = new BlurImage(img, height, width);
+        img = blur.storeRGB();
+        return img;
       }
-    }
-    if(e.getActionCommand().equals("blur")) {
-      System.out.println("Applying blur to the image");
-      try {
-        img = imageUtil.readImage(imgName);
-        height = imageUtil.getHeight();
-        width = imageUtil.getWidth();
-      } catch (IOException ex) {
-        ex.printStackTrace();
+      case "sharpen": {
+        IImage sharpen = new SharpenImage(img, height, width);
+        img = sharpen.storeRGB();
+        return img;
       }
-      image = new BlurImage(img, height, width);
-      img = image.storeRGB();
-        imgName = "blur-"+imgName;
-        imageUtil.writeImage("res/blur-"+imgName, img, width, height);
-      try {
-        imageView.generateImage(imgName);
-      } catch (IOException ex) {
-        ex.printStackTrace();
+      case "greyscale": {
+        IImage greyScale = new GreyScale(img, height, width);
+        img = greyScale.storeRGB();
+        return img;
       }
+      case "sepia": {
+        System.out.println("Applying sepia for the image");
+        IImage sepiaTone = new SepiaTone(img, height, width);
+        img = sepiaTone.storeRGB();
+        return img;
+      }
+      case "dither": {
+        System.out.println("Dithering the image");
+        IImage dither = new DitherImage(img, height, width);
+        img = dither.storeRGB();
+        return img;
+      }
+      default:
+        System.out.println("Operation not supported");
+        throw new IllegalArgumentException("Operation not supported");
     }
   }
 
+  public int getHeight(){
+    return height;
+  }
+  public int getWidth(){
+    return width;
+  }
 
+  public int[][][] generateVibgyor(String direction, int heightStr, int widthStr) {
+    height = heightStr;
+    width = widthStr;
+    if (direction.equals("horizontal")) {
+      System.out.println("Creating a horizontal VIBGYOR.");
+      GenerateVibgyorStripes horizontalVibgyor =
+              new GenerateVibgyorStripes(direction,height, width);
+      img = horizontalVibgyor.storeRGB();
+    } else if (direction.equals("vertical")) {
+      System.out.println("Creating a vertical VIBGYOR.");
+      GenerateVibgyorStripes vibgyorVerticalStripes =
+              new GenerateVibgyorStripes(direction, height, width);
+      img = vibgyorVerticalStripes.storeRGB();
+    }
+    return img;
+  }
 
+  public int[][][] generateCheckerboard(int squareSize) {
+    IImage checkerboard = new GenerateCheckerBoard(squareSize);
+    height = checkerboard.getHeight();
+    width = checkerboard.getWidth();
+    img = checkerboard.storeRGB();
+    return img;
+  }
+
+  public int[][][] applyMosaicEffect(int seeds) {
+      System.out.println("Applying mosaic for the image");
+      IImage mosaicImage = new MosaicImage(img, height, width, seeds);
+      img = mosaicImage.storeRGB();
+      return img;
+    }
 }

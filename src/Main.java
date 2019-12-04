@@ -21,12 +21,14 @@ public class Main {
       System.exit(-1);
     }
 
+    String[] arr = Arrays.copyOfRange(args, 1, args.length);
+
     if (args[0].equals("-script")) {
-      String[] arr = Arrays.copyOfRange(args, 1, args.length);
       ScriptController scriptController = new ScriptController();
       scriptController.main(arr);
     } else if (args[0].equals("-interactive")) {
-      GUIController controller = new GUIController();
+      GUIController guiController = new GUIController();
+      guiController.main(arr);
     } else {
       System.out.println("Operation not supported");
     }

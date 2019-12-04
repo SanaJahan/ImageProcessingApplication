@@ -1,13 +1,11 @@
 package view;
 
 import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.awt.event.ItemListener;
 
-public interface IImageView {
+import javax.swing.event.ListSelectionListener;
 
-  String drawImage() throws IOException;
-  void saveImage();
-  void generateImage(String input) throws IOException;
-  void setListener(ActionListener listener);
+public interface IImageView extends ActionListener {
+
 
   }
