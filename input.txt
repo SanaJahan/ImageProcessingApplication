@@ -1,7 +1,18 @@
 generate flag greece 200 300
 save greece-flag.png
+generate checkerboard 40
+save checkerboard.png
+load cat.png
+mosaic 1000
+save mosaic-cat.png
+load airplane.png
+mosaic 500
+save mosaic-airplane.png
 load cat.png
 dither
-mosaic
-save cat-dm.png
-
+save cat-dither.png
+load airplane.png
+dither
+save dither-airplane.png
+generate vibgyor horizontal 500 400
+save horizontal.png

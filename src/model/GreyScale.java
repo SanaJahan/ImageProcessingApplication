@@ -25,9 +25,8 @@ public class GreyScale extends AbstractColorTransformation {
    */
   @Override
   public int[][][] storeRGB() {
-    float[][] grayScale = {{0.2126f, 0.7152f, 0.0722f},
-            {0.2126f, 0.7152f, 0.0722f},
-            {0.2126f, 0.7152f, 0.0722f}};
+    float[][] grayScale = {{0.2126f, 0.7152f, 0.0722f}, {0.2126f, 0.7152f, 0.0722f},
+        {0.2126f, 0.7152f, 0.0722f}};
     return getOutput(grayScale);
   }
 }

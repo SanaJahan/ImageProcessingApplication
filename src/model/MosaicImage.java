@@ -16,12 +16,13 @@ public class MosaicImage extends ImageData {
    * @param width  Width of the image.
    * @throws IllegalArgumentException Thrown at IllegalArgumentException.
    */
-  public MosaicImage(int[][][] rgb, int height, int width, int seeds) throws IllegalArgumentException {
+  public MosaicImage(int[][][] rgb, int height, int width, int seeds)
+          throws IllegalArgumentException {
     super(rgb, height, width);
     this.seeds = seeds;
     if (seeds < 1 || height < 1 || width < 1) {
-      throw new IllegalArgumentException("Increase number of seeds or the height/ " +
-              "width of the image");
+      throw new IllegalArgumentException("Increase number of seeds or the height/ "
+              + "width of the image");
     }
     this.cluster = new int[height][width];
   }
@@ -63,9 +64,9 @@ public class MosaicImage extends ImageData {
     int[][][] result = new int[height][width][3];
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
-          result[i][j][0] = rgbAverage[cluster[i][j]][0];
-          result[i][j][1] = rgbAverage[cluster[i][j]][1];
-          result[i][j][2] = rgbAverage[cluster[i][j]][2];
+        result[i][j][0] = rgbAverage[cluster[i][j]][0];
+        result[i][j][1] = rgbAverage[cluster[i][j]][1];
+        result[i][j][2] = rgbAverage[cluster[i][j]][2];
       }
     }
     return result;

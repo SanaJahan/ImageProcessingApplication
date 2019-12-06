@@ -3,18 +3,18 @@ package model;
 /**
  * Generates an image with the colors of the rainbow.
  */
-public class GenerateVibgyorStripes extends ImageData implements IGenerateVibgyor{
+public class GenerateVibgyorStripes extends ImageData {
 
   private boolean horizontal = false;
 
   private int[][][] rainbow = new int[height][width][3];
   private int[][] colorRGB = {{255, 0, 0},
-    {255, 200, 0},
-    {255, 255, 0},
-    {0, 255, 0},
-    {0, 0, 255},
-    {75, 0, 130},
-    {128, 0, 128}};
+          {255, 200, 0},
+          {255, 255, 0},
+          {0, 255, 0},
+          {0, 0, 255},
+          {75, 0, 130},
+          {128, 0, 128}};
 
   /**
    * Constructor that calls the constructor of the ImageData class to set the rgb,height and width.
@@ -22,10 +22,10 @@ public class GenerateVibgyorStripes extends ImageData implements IGenerateVibgyo
    * @param width Width of the image.
    * @throws IllegalArgumentException Thrown at IllegalArgumentException.
    */
-  public GenerateVibgyorStripes(int height, int width) throws IllegalArgumentException {
+  public GenerateVibgyorStripes(String direction, int height, int width) throws IllegalArgumentException {
     super(new int[height][width][3], height, width);
-    if (height < 1 || width < 1) {
-      throw new IllegalArgumentException("Height/Width of the image is too less");
+    if(direction.equals("horizontal")) {
+      horizontal = true;
     }
   }
 
@@ -33,9 +33,7 @@ public class GenerateVibgyorStripes extends ImageData implements IGenerateVibgyo
    * Generates the rainbow colored image with horizontal stripes.
    * @return 3D matrix output.
    */
-  @Override
-  public int[][][] createHorizontalVIBGYOR() {
-    horizontal = true;
+  private int[][][] createHorizontalVIBGYOR() {
     int stripeWidth = (int) Math.ceil((double) height / 7);
     for (int i = 0; i < width; i++) {
       for (int j = 0; j < height; j++) {
@@ -63,8 +61,7 @@ public class GenerateVibgyorStripes extends ImageData implements IGenerateVibgyo
    * Generates the rainbow colored image with vertical stripes.
    * @return 3D matrix output.
    */
-  @Override
-  public int[][][] createVerticalVIBGYOR() {
+  private int[][][] createVerticalVIBGYOR() {
     int stripeWidth = (int) Math.ceil((double) width / 7);
     for (int i = 0; i < width; i++) {
       for (int j = 0; j < height; j++) {

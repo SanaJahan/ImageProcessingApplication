@@ -2,8 +2,6 @@ package utility;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -13,7 +11,7 @@ import javax.imageio.ImageIO;
  * Contains methods to help in reading and writing the images when the operation is called by the,
  * user in the script/text file.
  */
-public class FileReaderHelper {
+public class ImageUtil {
 
   private int height;
   private int width;
@@ -22,7 +20,8 @@ public class FileReaderHelper {
    *Reads the source image.
    */
   public int[][][] readImage(String term) throws IOException {
-    BufferedImage image = ImageIO.read(new FileInputStream("res/" + term));
+    ClassLoader classLoader = new ImageUtil().getClass().getClassLoader();
+    BufferedImage image = ImageIO.read(classLoader.getResource(term));
     if (image == null) {
       throw new IllegalArgumentException();
     }
@@ -47,22 +46,8 @@ public class FileReaderHelper {
    */
   public void writeImage(String filePath, int[][][] rgb, int width, int height) {
     try {
-      BufferedImage output = new BufferedImage(
-              width,
-              height,
-              BufferedImage.TYPE_INT_RGB);
-
-      for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
-          int red = rgb[i][j][0];
-          int green = rgb[i][j][1];
-          int blue = rgb[i][j][2];
-          int color = (red << 16) + (green << 8) + blue;
-          output.setRGB(j, i, color);
-        }
-      }
       String extension = filePath.substring(filePath.indexOf(".") + 1);
-      ImageIO.write(output, extension, new FileOutputStream(filePath));
+      ImageIO.write(getTransformedImage(rgb, width, height), extension, new FileOutputStream(filePath));
     } catch (IOException e) {
       System.out.println("Error Occurred!\n" + e);
     }
@@ -82,5 +67,23 @@ public class FileReaderHelper {
    */
   public int getWidth() {
     return width;
+  }
+
+  public BufferedImage getTransformedImage(int[][][] rgb, int width, int height) {
+    BufferedImage output = new BufferedImage(
+            width,
+            height,
+            BufferedImage.TYPE_INT_RGB);
+
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < width; j++) {
+        int red = rgb[i][j][0];
+        int green = rgb[i][j][1];
+        int blue = rgb[i][j][2];
+        int color = (red << 16) + (green << 8) + blue;
+        output.setRGB(j, i, color);
+      }
+    }
+    return output;
   }
 }
