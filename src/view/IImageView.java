@@ -1,19 +1,20 @@
 package view;
 
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
+import java.awt.event.ItemListener;
 
-public interface IImageView {
+import javax.swing.event.ListSelectionListener;
 
-  String drawImage() throws IOException;
+/**
+ * Interface that deals with creating the image in the view.
+ */
+public interface IImageView extends ActionListener {
 
-  void saveImage(BufferedImage output,String filename,String ext);
-
-  void generateImage(String input) throws IOException;
-
-  void setListener(ActionListener listener);
-
-  BufferedImage writeNewImage(int[][][] rgb, int width, int height);
-
+  /**
+   * Creates and updates the image in the viewing panel of the GUI.
+   * @param rgb Image matrix.
+   * @param width Width of the image.
+   * @param height Height of the image.
+   */
+  public void drawImage(int[][][] rgb, int width, int height);
   }

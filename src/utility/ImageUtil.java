@@ -1,9 +1,10 @@
 package utility;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
 
 /**
@@ -45,22 +46,8 @@ public class ImageUtil {
    */
   public void writeImage(String filePath, int[][][] rgb, int width, int height) {
     try {
-      BufferedImage output = new BufferedImage(
-              width,
-              height,
-              BufferedImage.TYPE_INT_RGB);
-
-      for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
-          int red = rgb[i][j][0];
-          int green = rgb[i][j][1];
-          int blue = rgb[i][j][2];
-          int color = (red << 16) + (green << 8) + blue;
-          output.setRGB(j, i, color);
-        }
-      }
       String extension = filePath.substring(filePath.indexOf(".") + 1);
-      ImageIO.write(output, extension, new FileOutputStream(filePath));
+      ImageIO.write(getTransformedImage(rgb, width, height), extension, new FileOutputStream(filePath));
     } catch (IOException e) {
       System.out.println("Error Occurred!\n" + e);
     }
@@ -80,5 +67,23 @@ public class ImageUtil {
    */
   public int getWidth() {
     return width;
+  }
+
+  public BufferedImage getTransformedImage(int[][][] rgb, int width, int height) {
+    BufferedImage output = new BufferedImage(
+            width,
+            height,
+            BufferedImage.TYPE_INT_RGB);
+
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < width; j++) {
+        int red = rgb[i][j][0];
+        int green = rgb[i][j][1];
+        int blue = rgb[i][j][2];
+        int color = (red << 16) + (green << 8) + blue;
+        output.setRGB(j, i, color);
+      }
+    }
+    return output;
   }
 }

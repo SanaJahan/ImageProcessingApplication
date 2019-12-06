@@ -5,10 +5,22 @@ package model;
  */
 public interface IImage {
 
+  /**
+   * This will store the 3D matrix values into the ImageData rgb value.
+   * @return The final 3D matrix.
+   */
   int[][][] storeRGB();
 
+  /**
+   * Height of the image.
+   * @return Height.
+   */
   int getHeight();
 
+  /**
+   * Width of the image.
+   * @return Width.
+   */
   int getWidth();
 
 }

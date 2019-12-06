@@ -1,180 +1,341 @@
 package view;
 
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
+import controller.GUIController;
 import utility.ImageUtil;
 
+/**
+ * Deals with the GUI components to be added to the application.
+ */
 public class ImageViewImpl extends JFrame implements IImageView {
 
-  private JLabel display;
-  private JMenu load, generate;
+  private GUIController controller;
+
+  private JPanel mainPanel;
+  private JScrollPane mainScrollPane;
+  private JLabel fileOpenDisplay;
+  private JLabel fileSaveDisplay;
+  private JLabel imageLabel;
+  private JPanel imagePanel;
+  private JScrollPane imageScrollPane;
   private JMenuBar menuBar;
-  private JLabel saveImage;
-  private JPanel mainPanel = new JPanel();
-  // Menu items
-  private JMenuItem loadImg, hVibgyor, vVibgyor, checkerboard,franceFlag,greeceFlag;
-  private JButton blurBtn, ditherBtn, mosaicBtn, greyScaleBtn, sepiaBtn,sharpenBtn,saveImageBtn;
-  private String imgName;
+  private JMenu menu;
+  private ImageUtil imageUtil = new ImageUtil();
 
 
-
+  /**
+   * Constructor where all the GUI components are added to the user interface of the application.
+   */
   public ImageViewImpl() {
-      display = new JLabel("Image Processor");
-      this.add(display);
+    super();
+    controller = new GUIController();
+    setTitle("Image Processor");
+    setSize(400, 400);
 
-      this.setVisible(true);
-      this.setSize(500,600);
-      this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      this.setLayout(new FlowLayout());
+    mainPanel = new JPanel();
+    //for elements to be arranged vertically within this panel
+    mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
+    //scroll bars around this main panel
+    mainScrollPane = new JScrollPane(mainPanel);
+    add(mainScrollPane);
 
-      //create the menu
-       menuBar = new JMenuBar();
-       load = new JMenu("Load");
-       generate = new JMenu("Generate");
+    // menu bar
+    JPanel menuBarPanel = new JPanel();
+    menuBarPanel.setBorder(BorderFactory.createTitledBorder("Select the effect you want"));
+    menuBarPanel.setLayout(new BoxLayout(menuBarPanel, BoxLayout.PAGE_AXIS));
+    menuBar = new JMenuBar();
+    menu = new JMenu("Menu");
+    JMenuItem blur = new JMenuItem("Blur");
+    blur.setActionCommand("blur");
+    blur.addActionListener(this);
 
-      // create menu items
-      loadImg = new JMenuItem("image");
-      loadImg.setActionCommand("load");
-      hVibgyor = new JMenuItem("Horizontal Vibgyor");
-      vVibgyor = new JMenuItem("Vertical Vibgyor");
-      checkerboard = new JMenuItem("Checkerboard");
-      franceFlag = new JMenuItem("France Flag");
-      greeceFlag = new JMenuItem("Greece Flag");
+    JMenuItem sepia = new JMenuItem("Sepia");
+    sepia.setActionCommand("sepia");
+    sepia.addActionListener(this);
 
-      // add menu items to menu
-      generate.add(hVibgyor);
-      generate.add(vVibgyor);
-      generate.add(checkerboard);
-      generate.add(franceFlag);
-      generate.add(greeceFlag);
-      load.add(loadImg);
+    JMenuItem sharpen = new JMenuItem("Sharpen");
+    sharpen.setActionCommand("sharpen");
+    sharpen.addActionListener(this);
 
-      // add menu to menu bar
-      menuBar.add(load);
-      menuBar.add(generate);
-      this.add(menuBar);
-      this.add(mainPanel);
-      // create all the buttons
-      blurBtn = new JButton("Blur");
-      blurBtn.setActionCommand("blur");
+    JMenuItem greyscale = new JMenuItem("Greyscale");
+    greyscale.setActionCommand("greyscale");
+    greyscale.addActionListener(this);
 
-      greyScaleBtn = new JButton("GreyScale");
-      greyScaleBtn.setActionCommand("greyscale");
+    JMenuItem dither = new JMenuItem("Dither");
+    dither.setActionCommand("dither");
+    dither.addActionListener(this);
 
-      sepiaBtn = new JButton("Sepia");
-      sepiaBtn.setActionCommand("sepia");
+    JMenuItem mosaic = new JMenuItem("Mosaic");
+    mosaic.setActionCommand("mosaic");
+    mosaic.addActionListener(this);
 
-      sharpenBtn = new JButton("Sharpen");
-      sharpenBtn.setActionCommand("sharpen");
+    JMenuItem vibgyor = new JMenuItem("Generate Vibgyor");
+    vibgyor.setActionCommand("vibgyor");
+    vibgyor.addActionListener(this);
 
-      ditherBtn = new JButton("Dither");
-      ditherBtn.setActionCommand("dither");
+    JMenuItem checkerboard = new JMenuItem("Generate CheckerBoard");
+    checkerboard.setActionCommand("checkerboard");
+    checkerboard.addActionListener(this);
 
-      mosaicBtn = new JButton("Mosaic");
-      mosaicBtn.setActionCommand("mosaic");
 
-      saveImageBtn = new JButton("Save Image");
-      saveImageBtn.setActionCommand("save");
+    menu.add(blur);
+    menu.add(sepia);
+    menu.add(sharpen);
+    menu.add(greyscale);
+    menu.add(dither);
+    menu.add(mosaic);
+    menu.add(vibgyor);
+    menu.add(checkerboard);
+    menuBar.add(menu);
+    mainPanel.add(menuBar);
+
+    //show an image with a scrollbar
+    imagePanel = new JPanel();
+    //a border around the panel with a caption
+    imagePanel.setBorder(BorderFactory.createTitledBorder("Selected image will be shown here"));
+    imagePanel.setLayout(new GridLayout(1, 0, 10, 10));
+    mainPanel.add(imagePanel);
+
+    // image label
+    imageLabel = new JLabel();
+
+    imageScrollPane = new JScrollPane(imageLabel);
+    imageScrollPane.setPreferredSize(new Dimension(100, 600));
+    imagePanel.add(imageScrollPane);
+
+    //dialog boxes
+    JPanel dialogBoxesPanel = new JPanel();
+    dialogBoxesPanel.setBorder(BorderFactory.createTitledBorder("Load or save an image"));
+    dialogBoxesPanel.setLayout(new BoxLayout(dialogBoxesPanel, BoxLayout.PAGE_AXIS));
+    mainPanel.add(dialogBoxesPanel);
+
+    //file open
+    JPanel fileopenPanel = new JPanel();
+    fileopenPanel.setLayout(new FlowLayout());
+    dialogBoxesPanel.add(fileopenPanel);
+    JButton fileOpenButton = new JButton("Open a file");
+    fileOpenButton.setActionCommand("Open file");
+    fileOpenButton.addActionListener(this);
+    fileopenPanel.add(fileOpenButton);
+    fileOpenDisplay = new JLabel("File path will appear here");
+    fileopenPanel.add(fileOpenDisplay);
+
+    //file save
+    JPanel filesavePanel = new JPanel();
+    filesavePanel.setLayout(new FlowLayout());
+    dialogBoxesPanel.add(filesavePanel);
+    JButton fileSaveButton = new JButton("Save a file");
+    fileSaveButton.setActionCommand("Save file");
+    fileSaveButton.addActionListener(this);
+    filesavePanel.add(fileSaveButton);
+    fileSaveDisplay = new JLabel("File path will appear here");
+    filesavePanel.add(fileSaveDisplay);
+
+    //file reset
+    JPanel resetPanel = new JPanel();
+    resetPanel.setLayout(new FlowLayout());
+    dialogBoxesPanel.add(resetPanel);
+    JButton resetButton = new JButton("Reset");
+    resetButton.setActionCommand("Reset");
+    resetButton.addActionListener(this);
+    resetPanel.add(resetButton);
 
   }
 
-
+  /**
+   * Mentions the actions that need to be performed when a particular effect is requested.
+   * @param e
+   */
   @Override
-  public String drawImage() throws IOException {
-    this.setVisible(false);
-    this.imgName = JOptionPane.showInputDialog("Please input a value");
-    System.out.println(imgName);
-    displayImage(imgName);
-    return imgName;
+  public void actionPerformed(ActionEvent e) {
+    int height = -1;
+    int width = -1;
+    switch (e.getActionCommand()) {
+      case "Open file": {
+        final JFileChooser fchooser = new JFileChooser(".");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "Images", "jpg", "png");
+        fchooser.setFileFilter(filter);
+        int retvalue = fchooser.showOpenDialog(ImageViewImpl.this);
+        if (retvalue == JFileChooser.APPROVE_OPTION) {
+          File file = fchooser.getSelectedFile();
+          if (file == null) {
+            JOptionPane.showMessageDialog(new JFrame(),
+                    "No image was selected to load", "Dialog",
+                    JOptionPane.ERROR_MESSAGE);
+            break;
+          }
+          fileOpenDisplay.setText(file.getAbsolutePath());
+          imageLabel.setIcon(new ImageIcon(file.getAbsolutePath()));
+          imageLabel.setHorizontalAlignment(JLabel.CENTER);
 
-  }
-
-  @Override
-  public void saveImage(BufferedImage output,String filename,String ext) {
-    try {
-      if (ext == "png" || ext == "jpg" || ext == "bmp") {
-        filename = filename + "." + ext;
+          try {
+            controller.loadImage(file.getName());
+          } catch (IOException ex) {
+            ex.printStackTrace();
+          }
+          imagePanel.updateUI();
+        }
+        break;
       }
-      File outputFile = new File(filename);
-      ImageIO.write(output,ext,outputFile);
-
-      JFileChooser fileChooser = new JFileChooser();
-      int option = fileChooser.showSaveDialog(ImageViewImpl.this);
-      if(option == JFileChooser.APPROVE_OPTION){
-        fileChooser.setSelectedFile(outputFile);
-        saveImage.setText("File Saved as: " + outputFile.getName());
-      }else{
-        saveImage.setText("Save command canceled");
+      case "blur": {
+        width = controller.getWidth();
+        height = controller.getHeight();
+        if (width < 0 || height < 0) {
+          JOptionPane.showMessageDialog(new JFrame(),
+                  "Please open an image file to apply the effect", "Dialog",
+                  JOptionPane.ERROR_MESSAGE);
+          break;
+        }
+        drawImage(controller.applyEffect("blur"), width, height);
+        break;
       }
-    }
-    catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
+      case "sharpen": {
+        width = controller.getWidth();
+        height = controller.getHeight();
+        if (width < 0 || height < 0) {
+          JOptionPane.showMessageDialog(new JFrame(),
+                  "Please open an image file to apply the effect", "Dialog",
+                  JOptionPane.ERROR_MESSAGE);
+          break;
+        }
+        drawImage(controller.applyEffect("sharpen"), width, height);
+        break;
+      }
+      case "greyscale": {
+        width = controller.getWidth();
+        height = controller.getHeight();
+        if (width < 0 || height < 0) {
+          JOptionPane.showMessageDialog(new JFrame(),
+                  "Please open an image file to apply the effect", "Dialog",
+                  JOptionPane.ERROR_MESSAGE);
+          break;
+        }
+        drawImage(controller.applyEffect("greyscale"), width, height);
+        break;
+      }
+      case "sepia": {
+        width = controller.getWidth();
+        height = controller.getHeight();
+        if (width < 0 || height < 0) {
+          JOptionPane.showMessageDialog(new JFrame(),
+                  "Please open an image file to apply the effect", "Dialog",
+                  JOptionPane.ERROR_MESSAGE);
+          break;
+        }
+        drawImage(controller.applyEffect("sepia"), width, height);
+        break;
+      }
+      case "mosaic": {
+        width = controller.getWidth();
+        height = controller.getHeight();
+        if (width < 0 || height < 0) {
+          JOptionPane.showMessageDialog(new JFrame(),
+                  "Please open an image file to apply the effect", "Dialog",
+                  JOptionPane.ERROR_MESSAGE);
+          break;
+        }
+        int seeds = Integer.parseInt(JOptionPane.showInputDialog("Enter seed value"));
+        if (seeds < 2) {
+          JOptionPane.showMessageDialog(new JFrame(),
+                  "Seeds value should be greater than 1", "Dialog",
+                  JOptionPane.ERROR_MESSAGE);
 
-
-  @Override
-  public void generateImage(String input) throws IOException {
-    this.setVisible(false);
-    displayImage(input);
-  }
-
-  private void displayImage(String input) throws IOException {
-    ClassLoader classLoader = new ImageUtil().getClass().getClassLoader();
-    BufferedImage image = ImageIO.read(classLoader.getResource(input));
-    ImageIcon icon = new ImageIcon(image);
-    JLabel label = new JLabel(icon);
-    JScrollPane pane = new JScrollPane(label);
-    mainPanel.add(pane);
-    //create all the transform buttons
-    this.add(blurBtn);
-    this.add(greyScaleBtn);
-    this.add(sepiaBtn);
-    this.add(sharpenBtn);
-    this.add(ditherBtn);
-    this.add(mosaicBtn);
-    this.add(saveImageBtn);
-    this.setVisible(true);
-    System.out.println("Image showed");
-  }
-
-  @Override
-  public void setListener(ActionListener listener) {
-    loadImg.addActionListener(listener);
-    blurBtn.addActionListener(listener);
-    greyScaleBtn.addActionListener(listener);
-    sepiaBtn.addActionListener(listener);
-    sharpenBtn.addActionListener(listener);
-    ditherBtn.addActionListener(listener);
-    mosaicBtn.addActionListener(listener);
-    saveImageBtn.addActionListener(listener);
-  }
-
-  @Override
-  public BufferedImage writeNewImage(int[][][] rgb, int width, int height) {
-      BufferedImage output = new BufferedImage(
-              width,
-              height,
-              BufferedImage.TYPE_INT_RGB);
-
-      for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
-          int red = rgb[i][j][0];
-          int green = rgb[i][j][1];
-          int blue = rgb[i][j][2];
-          int color = (red << 16) + (green << 8) + blue;
-          output.setRGB(j, i, color);
+        }
+        drawImage(controller.applyMosaicEffect(seeds), width, height);
+        break;
+      }
+      case "dither": {
+        width = controller.getWidth();
+        height = controller.getHeight();
+        if (width < 0 || height < 0) {
+          JOptionPane.showMessageDialog(new JFrame(),
+                  "Please open an image file to apply the effect", "Dialog",
+                  JOptionPane.ERROR_MESSAGE);
+          break;
+        }
+        drawImage(controller.applyEffect("dither"), width, height);
+        break;
+      }
+      case "vibgyor": {
+        String direction = JOptionPane.showInputDialog("Please enter direction of stripe");
+        String heightStr = JOptionPane.showInputDialog("Please enter height");
+        String widthStr = JOptionPane.showInputDialog("Please enter width");
+        width = Integer.parseInt(widthStr);
+        height = Integer.parseInt(heightStr);
+        if (width < 0 || height < 0 || !direction.equals("horizontal")
+                && !direction.equals("vertical")) {
+          JOptionPane.showMessageDialog(new JFrame(),
+                  "Generation of image failed. Please try again", "Dialog",
+                  JOptionPane.ERROR_MESSAGE);
+          break;
+        }
+        drawImage(controller.generateVibgyor(direction, width,
+                height), height, width);
+        break;
+      }
+      case "checkerboard": {
+        String squareSize = JOptionPane.showInputDialog("Please enter square size value");
+        if (Integer.parseInt(squareSize) < 1) {
+          JOptionPane.showMessageDialog(new JFrame(),
+                  "Square size should be greater than 0", "Dialog",
+                  JOptionPane.ERROR_MESSAGE);
+          break;
+        }
+        int[][][] img = controller.generateCheckerboard(Integer.parseInt(squareSize));
+        height = controller.getHeight();
+        width = controller.getWidth();
+        drawImage(img, width, height);
+        break;
+      }
+      case "Save file": {
+        final JFileChooser fchooser = new JFileChooser(".");
+        int retvalue = fchooser.showSaveDialog(ImageViewImpl.this);
+        if (retvalue == JFileChooser.APPROVE_OPTION) {
+          File f = fchooser.getSelectedFile();
+          if (f == null) {
+            JOptionPane.showMessageDialog(new JFrame(),
+                    "Failed to save image.Please try again", "Dialog",
+                    JOptionPane.ERROR_MESSAGE);
+            break;
+          }
+          fileSaveDisplay.setText(f.getAbsolutePath());
+          controller.saveImage(f.getAbsolutePath());
         }
       }
-      return output;
+      case "Reset": {
+        imageLabel.setIcon(null);
+        fileOpenDisplay.setText("File path will appear here");
+        break;
+      }
+    }
   }
 
+  /**
+   * Creates and updates the image in the viewing panel of the GUI.
+   * @param rgb Image matrix.
+   * @param width Width of the image.
+   * @param height Height of the image.
+   */
+  @Override
+  public void drawImage(int[][][] rgb, int width, int height) {
+    if (rgb == null) {
+      JOptionPane.showMessageDialog(new JFrame(),
+              "Effect cannot be applied. Please try again", "Dialog",
+              JOptionPane.ERROR_MESSAGE);
+    }
+    BufferedImage output = imageUtil.getTransformedImage(rgb, width, height);
+    imageLabel.setIcon(new ImageIcon(output));
+    imagePanel.updateUI();
+  }
 }
+
+

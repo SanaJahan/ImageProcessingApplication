@@ -14,3 +14,5 @@ save cat-dither.png
 load airplane.png
 dither
 save dither-airplane.png
+generate vibgyor horizontal 500 400
+save horizontal.png
