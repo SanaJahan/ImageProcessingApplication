@@ -6,16 +6,15 @@ package model;
 public class GenerateVibgyorStripes extends ImageData {
 
   private boolean horizontal = false;
-  private String direction = "";
 
   private int[][][] rainbow = new int[height][width][3];
   private int[][] colorRGB = {{255, 0, 0},
-    {255, 200, 0},
-    {255, 255, 0},
-    {0, 255, 0},
-    {0, 0, 255},
-    {75, 0, 130},
-    {128, 0, 128}};
+          {255, 200, 0},
+          {255, 255, 0},
+          {0, 255, 0},
+          {0, 0, 255},
+          {75, 0, 130},
+          {128, 0, 128}};
 
   /**
    * Constructor that calls the constructor of the ImageData class to set the rgb,height and width.
@@ -23,11 +22,10 @@ public class GenerateVibgyorStripes extends ImageData {
    * @param width Width of the image.
    * @throws IllegalArgumentException Thrown at IllegalArgumentException.
    */
-  public GenerateVibgyorStripes(String direction,int height, int width) throws IllegalArgumentException {
+  public GenerateVibgyorStripes(String direction, int height, int width) throws IllegalArgumentException {
     super(new int[height][width][3], height, width);
-    this.direction = direction;
-    if(direction.equals("horizontal")){
-      this.horizontal = true;
+    if(direction.equals("horizontal")) {
+      horizontal = true;
     }
   }
 
@@ -36,7 +34,6 @@ public class GenerateVibgyorStripes extends ImageData {
    * @return 3D matrix output.
    */
   private int[][][] createHorizontalVIBGYOR() {
-    horizontal = true;
     int stripeWidth = (int) Math.ceil((double) height / 7);
     for (int i = 0; i < width; i++) {
       for (int j = 0; j < height; j++) {
@@ -58,7 +55,6 @@ public class GenerateVibgyorStripes extends ImageData {
       }
     }
     return rgb;
-
   }
 
   /**
@@ -87,8 +83,8 @@ public class GenerateVibgyorStripes extends ImageData {
       }
     }
     return rainbow;
-
   }
+
   /**
    * This will store the blur 3D matrix values into the ImageData rgb value.
    * @return The final 3D matrix.

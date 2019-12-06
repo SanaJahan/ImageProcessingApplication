@@ -110,9 +110,9 @@ public class GUIController  {
       img = horizontalVibgyor.storeRGB();
     } else if (direction.equals("vertical")) {
       System.out.println("Creating a vertical VIBGYOR.");
-      GenerateVibgyorStripes vibgyorVerticalStripes =
+      GenerateVibgyorStripes verticalVibgyor =
               new GenerateVibgyorStripes(direction, height, width);
-      img = vibgyorVerticalStripes.storeRGB();
+      img = verticalVibgyor.storeRGB();
     }
     return img;
   }

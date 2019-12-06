@@ -7,5 +7,5 @@ import javax.swing.event.ListSelectionListener;
 
 public interface IImageView extends ActionListener {
 
-
+  public void drawImage(int[][][] rgb, int width, int height);
   }

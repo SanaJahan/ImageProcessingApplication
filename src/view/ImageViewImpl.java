@@ -248,8 +248,8 @@ public class ImageViewImpl extends JFrame implements IImageView {
                   JOptionPane.ERROR_MESSAGE);
           break;
         }
-        drawImage(controller.generateVibgyor(direction, height,
-                width), height, width);
+        drawImage(controller.generateVibgyor(direction, width,
+                height), height, width);
         break;
       }
       case "checkerboard": {
@@ -281,12 +281,13 @@ public class ImageViewImpl extends JFrame implements IImageView {
       }
       case "Reset": {
         imageLabel.setIcon(null);
+        fileOpenDisplay.setText("File path will appear here");
         break;
       }
     }
   }
 
-
+  @Override
   public void drawImage(int[][][] rgb, int width, int height) {
     if (rgb == null) {
       JOptionPane.showMessageDialog(new JFrame(), "Effect cannot be applied. Please try again", "Dialog",
