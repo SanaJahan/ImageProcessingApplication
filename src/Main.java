@@ -24,11 +24,9 @@ public class Main {
     String[] arr = Arrays.copyOfRange(args, 1, args.length);
 
     if (args[0].equals("-script")) {
-      ScriptController scriptController = new ScriptController();
-      scriptController.main(arr);
+      ScriptController.main(arr);
     } else if (args[0].equals("-interactive")) {
-      GUIController guiController = new GUIController();
-      guiController.main(arr);
+      GUIController.main(arr);
     } else {
       System.out.println("Operation not supported");
     }

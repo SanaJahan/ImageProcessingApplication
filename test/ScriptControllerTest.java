@@ -5,42 +5,40 @@ import java.io.IOException;
 
 import controller.ScriptController;
 
+/**
+ * Tests for the generation, transformation and filtering operations that can be performed on the,
+ * image if the type of user interaction is through a script, like a text file.
+ */
 public class ScriptControllerTest {
 
-  private ScriptController scriptController;
-
-  @Before
-  public void setUp() {
-    scriptController = new ScriptController();
-  }
 
   // test for load fail and pass
   @Test(expected = IllegalArgumentException.class)
   public void loadFailed() throws IOException {
-    scriptController.processTerms(new String[]{"load","image-not-there"});
+    ScriptController.processTerms(new String[]{"load","image-not-there"});
   }
 
   // test for generate flag
   @Test
   public void testGenerateFlag() throws IOException {
-    scriptController.processTerms(new String[]{"generate","flag","greece","200","300"});
-    scriptController.processTerms(new String[]{"save", "greece-flag.png"});
+    ScriptController.processTerms(new String[]{"generate","flag","greece","200","300"});
+    ScriptController.processTerms(new String[]{"save", "greece-flag.png"});
   }
 
   // test for vibgyor
   @Test
   public void testVibgyor() throws IOException {
-    scriptController.processTerms(new String[]{"generate","vibgyor","horizontal","500","400"});
-    scriptController.processTerms(new String[]{"save", "horizontal.png"});
+    ScriptController.processTerms(new String[]{"generate","vibgyor","horizontal","500","400"});
+    ScriptController.processTerms(new String[]{"save", "horizontal.png"});
 
   }
 
   // test for blur
   @Test
   public void testBlur() throws IOException {
-    scriptController.processTerms(new String[]{"load","cat.png"});
-    scriptController.processTerms(new String[]{"blur"});
-    scriptController.processTerms(new String[]{"save", "catblur.png"});
+    ScriptController.processTerms(new String[]{"load","cat.png"});
+    ScriptController.processTerms(new String[]{"blur"});
+    ScriptController.processTerms(new String[]{"save", "catblur.png"});
   }
 
 }

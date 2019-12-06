@@ -83,4 +83,33 @@ The application currently supports any kind of file like text or bash files. The
 7. save to save a new output image after the operations have been added:
 
     Eg: save greece-flag.png
+ 
+
+<b><i>Part 2</i></b>
+
+<font size = "40"><b>To Run the Application:</b></font>
+
+In order to run the application in script mode, you can run the following command in console.
+
+java -jar [path to the jar file] -script [path to the script]
+Eg:"java -jar out/artifacts/ImageProcessingApp_jar/ImageProcessingApp.jar -script input.txt"
+
+In order to run the application in GUI mode, you can run the following command in console.
+
+java -jar [path to the jar file] -interactive
+Eg:"java -jar out/artifacts/ImageProcessingApp_jar/ImageProcessingApp.jar -interactive"
+
+
+<font size = "40"><b>New Features added:</b></font>
+GUI mode where the user can select the image transformation or filtering effects from a dropdown menu option.
+User can load a file and save an image file.
+Also, user can see the effects being applied to the image.
+User can also generate checkerboard & vibgyor.
+
+<font size = "40"><b>Design Changes</b></font>
+1. removed vibgyor interface
+2. Changed name of main controller to main and took it out of the controller package, since it not exactly a controller but the entry point of the application
+3. changed name of FileReader to ImageUtil
+
+
 
