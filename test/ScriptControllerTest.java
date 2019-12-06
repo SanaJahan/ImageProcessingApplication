@@ -1,12 +1,9 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import controller.ScriptController;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 public class ScriptControllerTest {
 
@@ -17,22 +14,33 @@ public class ScriptControllerTest {
     scriptController = new ScriptController();
   }
 
-  // test when file is missing
-  @Test
-  public void testFileMissing(){
-    scriptController.main(new String[]{"filenotexist"});
-    
-  }
   // test for load fail and pass
+  @Test(expected = IllegalArgumentException.class)
+  public void loadFailed() throws IOException {
+    scriptController.processTerms(new String[]{"load","image-not-there"});
+  }
+
   // test for generate flag
+  @Test
+  public void testGenerateFlag() throws IOException {
+    scriptController.processTerms(new String[]{"generate","flag","greece","200","300"});
+    scriptController.processTerms(new String[]{"save", "greece-flag.png"});
+  }
+
   // test for vibgyor
-  // test for checkerboard
+  @Test
+  public void testVibgyor() throws IOException {
+    scriptController.processTerms(new String[]{"generate","vibgyor","horizontal","500","400"});
+    scriptController.processTerms(new String[]{"save", "horizontal.png"});
+
+  }
+
   // test for blur
-  //test for sharpen
-  //test for sepia
-  //test for greyscale
-  // test for mosaic
-  // test for dither
-  //test for save
+  @Test
+  public void testBlur() throws IOException {
+    scriptController.processTerms(new String[]{"load","cat.png"});
+    scriptController.processTerms(new String[]{"blur"});
+    scriptController.processTerms(new String[]{"save", "catblur.png"});
+  }
 
 }
