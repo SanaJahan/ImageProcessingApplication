@@ -168,8 +168,6 @@ public class ImageViewImpl extends JFrame implements IImageView {
 
           try {
             controller.loadImage(file.getName());
-            height = controller.getHeight();
-            width = controller.getWidth();
           } catch (IOException ex) {
             ex.printStackTrace();
           }
@@ -178,6 +176,8 @@ public class ImageViewImpl extends JFrame implements IImageView {
         break;
       }
       case "blur": {
+        width = controller.getWidth();
+        height = controller.getHeight();
         if (width < 0 || height < 0) {
           JOptionPane.showMessageDialog(new JFrame(), "Please open an image file to apply the effect", "Dialog",
                   JOptionPane.ERROR_MESSAGE);
@@ -187,6 +187,8 @@ public class ImageViewImpl extends JFrame implements IImageView {
         break;
       }
       case "sharpen": {
+        width = controller.getWidth();
+        height = controller.getHeight();
         if (width < 0 || height < 0) {
           JOptionPane.showMessageDialog(new JFrame(), "Please open an image file to apply the effect", "Dialog",
                   JOptionPane.ERROR_MESSAGE);
@@ -196,6 +198,8 @@ public class ImageViewImpl extends JFrame implements IImageView {
         break;
       }
       case "greyscale": {
+        width = controller.getWidth();
+        height = controller.getHeight();
         if (width < 0 || height < 0) {
           JOptionPane.showMessageDialog(new JFrame(), "Please open an image file to apply the effect", "Dialog",
                   JOptionPane.ERROR_MESSAGE);
@@ -205,6 +209,8 @@ public class ImageViewImpl extends JFrame implements IImageView {
         break;
       }
       case "sepia": {
+        width = controller.getWidth();
+        height = controller.getHeight();
         if (width < 0 || height < 0) {
           JOptionPane.showMessageDialog(new JFrame(), "Please open an image file to apply the effect", "Dialog",
                   JOptionPane.ERROR_MESSAGE);
@@ -214,6 +220,8 @@ public class ImageViewImpl extends JFrame implements IImageView {
         break;
       }
       case "mosaic": {
+        width = controller.getWidth();
+        height = controller.getHeight();
         if (width < 0 || height < 0) {
           JOptionPane.showMessageDialog(new JFrame(), "Please open an image file to apply the effect", "Dialog",
                   JOptionPane.ERROR_MESSAGE);
@@ -229,6 +237,8 @@ public class ImageViewImpl extends JFrame implements IImageView {
         break;
       }
       case "dither": {
+        width = controller.getWidth();
+        height = controller.getHeight();
         if (width < 0 || height < 0) {
           JOptionPane.showMessageDialog(new JFrame(), "Please open an image file to apply the effect", "Dialog",
                   JOptionPane.ERROR_MESSAGE);
