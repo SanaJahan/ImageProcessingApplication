@@ -101,15 +101,12 @@ Eg:"java -jar out/artifacts/ImageProcessingApp_jar/ImageProcessingApp.jar -inter
 
 
 <font size = "40"><b>New Features added:</b></font>
-GUI mode where the user can select the image transformation or filtering effects from a dropdown menu option.
-User can load a file and save an image file.
-Also, user can see the effects being applied to the image.
-User can also generate checkerboard & vibgyor.
+A GUI has been added to the application where the user can select the type of image transformation or filtering that they want, from a drop down menu, after opening the required image from a dialog. The user can also generate images of a checkerboard and horizontal or vertical striped rainbow images as well. They will be able to see the changes being made to the images they selected and they can ultimately save them to a preferred location.
 
 <font size = "40"><b>Design Changes</b></font>
-1. removed vibgyor interface
-2. Changed name of main controller to main and took it out of the controller package, since it not exactly a controller but the entry point of the application
-3. changed name of FileReader to ImageUtil
+1. The interface for the generation of the horizontal and vertical rainbow images has been removed.
+2. MainController has been changed to Main and it has been removed from the controller package. It is now not a controller, but an entry point to the application.
+3. FileReader has been renamed to ImageUtil.
 
 
 
