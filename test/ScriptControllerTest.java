@@ -5,6 +5,10 @@ import java.io.IOException;
 
 import controller.ScriptController;
 
+/**
+ * Tests for the generation, transformation and filtering operations that can be performed on the,
+ * image if the type of user interaction is through a script, like a text file.
+ */
 public class ScriptControllerTest {
 
 
