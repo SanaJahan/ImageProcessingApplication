@@ -22,7 +22,7 @@ The images used in the application were airplane.png and cat.png taken from the 
 https://homepages.cae.wisc.edu/~ece533/images/ . 
 
 
-Both cat.png and airplane.png are owned by the website mentioned above. The website holds images soley meant for project work
+Both cat.png and airplane.png are owned by the website mentioned above. The website holds images solely meant for project work
 and testing.
 
 <b><i>Part 2</i></b>
@@ -95,11 +95,16 @@ java -jar [path to the jar file] -script [path to the script] Eg:"java -jar out/
 
 In order to run the application in GUI mode, you can run the following command in console.
 
-java -jar [path to the jar file] -interactive Eg:"java -jar out/artifacts/ImageProcessingApp_jar/ImageProcessingApp.jar -interactive"
 
-New Features added: A GUI has been added to the application where the user can select the type of image transformation or filtering that they want, from a drop down menu, after opening the required image from a dialog. The user can also generate images of a checkerboard and horizontal or vertical striped rainbow images as well. They will be able to see the changes being made to the images they selected and they can ultimately save them to a preferred location.
+java -jar [path to the jar file] -interactive
+Eg:"java -jar out/artifacts/ImageProcessingApp_jar/ImageProcessingApp.jar -interactive"
 
-Design Changes
+
+<font size = "40"><b>New Features added:</b></font>
+A GUI has been added to the application where the user can select the type of image transformation or filtering that they want, from a drop down menu, after opening the required image from a dialog. The user can also generate images of a checkerboard and horizontal or vertical striped rainbow images as well. They will be able to see the changes being made to the images they selected and they can ultimately save them to a preferred location.
+
+
+<font size = "40"><b>Design Changes</b></font>
 
 The interface for the generation of the horizontal and vertical rainbow images has been removed.
 MainController has been changed to Main and it has been removed from the controller package. It is now not a controller, but an entry point to the application.
