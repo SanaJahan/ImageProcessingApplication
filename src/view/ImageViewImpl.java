@@ -320,7 +320,7 @@ public class ImageViewImpl extends JFrame implements IImageView {
   }
 
   /**
-   * For creating the new image on the UI.
+   * Creates and updates the image in the viewing panel of the GUI.
    * @param rgb Image matrix.
    * @param width Width of the image.
    * @param height Height of the image.
