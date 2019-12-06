@@ -41,6 +41,7 @@ public abstract class ImageData implements IImage {
    * Gets the height of the image that is getting altered.
    * @return Height.
    */
+  @Override
   public int getHeight() {
     return height;
   }
@@ -51,6 +52,7 @@ public abstract class ImageData implements IImage {
    *
    * @return the width of the image as an int data type.
    */
+  @Override
   public int getWidth() {
     return width;
   }

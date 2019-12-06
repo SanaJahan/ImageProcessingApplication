@@ -1,6 +1,6 @@
 package utility;
 
-import java.awt.*;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -47,7 +47,8 @@ public class ImageUtil {
   public void writeImage(String filePath, int[][][] rgb, int width, int height) {
     try {
       String extension = filePath.substring(filePath.indexOf(".") + 1);
-      ImageIO.write(getTransformedImage(rgb, width, height), extension, new FileOutputStream(filePath));
+      ImageIO.write(getTransformedImage(rgb, width, height),
+              extension, new FileOutputStream(filePath));
     } catch (IOException e) {
       System.out.println("Error Occurred!\n" + e);
     }
@@ -69,6 +70,13 @@ public class ImageUtil {
     return width;
   }
 
+  /**
+   * the buffered image, using the rgb matrix is generated.
+   * @param rgb the pixel matrix.
+   * @param width the width of the image.
+   * @param height the height of the image.
+   * @return the buffered image.
+   */
   public BufferedImage getTransformedImage(int[][][] rgb, int width, int height) {
     BufferedImage output = new BufferedImage(
             width,

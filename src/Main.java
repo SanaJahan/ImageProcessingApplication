@@ -28,7 +28,7 @@ public class Main {
     } else if (args[0].equals("-interactive")) {
       GUIController.main(arr);
     } else {
-      System.out.println("Operation not supported");
+      throw new IllegalArgumentException("Operation not supported");
     }
   }
 }

@@ -1,12 +1,26 @@
 package view;
 
-import java.awt.*;
+import java.awt.GridLayout;
+import java.awt.FlowLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JMenu;
+import javax.swing.JLabel;
+import javax.swing.JMenuBar;
+import javax.swing.BoxLayout;
+import javax.swing.BorderFactory;
+import javax.swing.JMenuItem;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.ImageIcon;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import controller.GUIController;
@@ -19,15 +33,10 @@ public class ImageViewImpl extends JFrame implements IImageView {
 
   private GUIController controller;
 
-  private JPanel mainPanel;
-  private JScrollPane mainScrollPane;
   private JLabel fileOpenDisplay;
   private JLabel fileSaveDisplay;
   private JLabel imageLabel;
   private JPanel imagePanel;
-  private JScrollPane imageScrollPane;
-  private JMenuBar menuBar;
-  private JMenu menu;
   private ImageUtil imageUtil = new ImageUtil();
 
 
@@ -39,8 +48,12 @@ public class ImageViewImpl extends JFrame implements IImageView {
     controller = new GUIController();
     setTitle("Image Processor");
     setSize(400, 400);
+    JPanel mainPanel;
 
     mainPanel = new JPanel();
+    JScrollPane mainScrollPane;
+    JScrollPane imageScrollPane;
+
     //for elements to be arranged vertically within this panel
     mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
     //scroll bars around this main panel
@@ -51,7 +64,11 @@ public class ImageViewImpl extends JFrame implements IImageView {
     JPanel menuBarPanel = new JPanel();
     menuBarPanel.setBorder(BorderFactory.createTitledBorder("Select the effect you want"));
     menuBarPanel.setLayout(new BoxLayout(menuBarPanel, BoxLayout.PAGE_AXIS));
+
+    JMenuBar menuBar;
     menuBar = new JMenuBar();
+
+    JMenu menu;
     menu = new JMenu("Menu");
     JMenuItem blur = new JMenuItem("Blur");
     blur.setActionCommand("blur");
@@ -152,7 +169,8 @@ public class ImageViewImpl extends JFrame implements IImageView {
 
   /**
    * Mentions the actions that need to be performed when a particular effect is requested.
-   * @param e
+   * @param e is the even that was triggered by the user,
+   *         in the UI interaction like clicking a button.
    */
   @Override
   public void actionPerformed(ActionEvent e) {
@@ -310,11 +328,17 @@ public class ImageViewImpl extends JFrame implements IImageView {
           fileSaveDisplay.setText(f.getAbsolutePath());
           controller.saveImage(f.getAbsolutePath());
         }
+        break;
       }
       case "Reset": {
         imageLabel.setIcon(null);
         fileOpenDisplay.setText("File path will appear here");
         break;
+      }
+      default: {
+        JOptionPane.showMessageDialog(new JFrame(),
+                "No valid options was selected", "Dialog",
+                JOptionPane.ERROR_MESSAGE);
       }
     }
   }
@@ -334,6 +358,7 @@ public class ImageViewImpl extends JFrame implements IImageView {
     }
     BufferedImage output = imageUtil.getTransformedImage(rgb, width, height);
     imageLabel.setIcon(new ImageIcon(output));
+    imageLabel.setHorizontalAlignment(JLabel.CENTER);
     imagePanel.updateUI();
   }
 }

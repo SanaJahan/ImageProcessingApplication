@@ -85,31 +85,22 @@ The application currently supports any kind of file like text or bash files. The
     Eg: save greece-flag.png
  
 
-<b><i>Part 2</i></b>
+<b><i>Part 3</i></b>
 
 <font size = "40"><b>To Run the Application:</b></font>
 
 In order to run the application in script mode, you can run the following command in console.
 
-java -jar [path to the jar file] -script [path to the script]
-Eg:"java -jar out/artifacts/ImageProcessingApp_jar/ImageProcessingApp.jar -script input.txt"
+java -jar [path to the jar file] -script [path to the script] Eg:"java -jar out/artifacts/ImageProcessingApp_jar/ImageProcessingApp.jar -script input.txt"
 
 In order to run the application in GUI mode, you can run the following command in console.
 
-java -jar [path to the jar file] -interactive
-Eg:"java -jar out/artifacts/ImageProcessingApp_jar/ImageProcessingApp.jar -interactive"
+java -jar [path to the jar file] -interactive Eg:"java -jar out/artifacts/ImageProcessingApp_jar/ImageProcessingApp.jar -interactive"
 
+New Features added: A GUI has been added to the application where the user can select the type of image transformation or filtering that they want, from a drop down menu, after opening the required image from a dialog. The user can also generate images of a checkerboard and horizontal or vertical striped rainbow images as well. They will be able to see the changes being made to the images they selected and they can ultimately save them to a preferred location.
 
-<font size = "40"><b>New Features added:</b></font>
-GUI mode where the user can select the image transformation or filtering effects from a dropdown menu option.
-User can load a file and save an image file.
-Also, user can see the effects being applied to the image.
-User can also generate checkerboard & vibgyor.
+Design Changes
 
-<font size = "40"><b>Design Changes</b></font>
-1. removed vibgyor interface
-2. Changed name of main controller to main and took it out of the controller package, since it not exactly a controller but the entry point of the application
-3. changed name of FileReader to ImageUtil
-
-
-
+The interface for the generation of the horizontal and vertical rainbow images has been removed.
+MainController has been changed to Main and it has been removed from the controller package. It is now not a controller, but an entry point to the application.
+FileReader has been renamed to ImageUtil.

@@ -2,7 +2,8 @@ package controller;
 
 import java.io.IOException;
 
-import javax.swing.*;
+
+import javax.swing.JFrame;
 
 import model.BlurImage;
 import model.DitherImage;
@@ -37,16 +38,6 @@ public class GUIController  {
 
     imageViewFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     imageViewFrame.setVisible(true);
-    try {
-      // Set cross-platform Java L&F (also called "Metal")
-      UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-    } catch (UnsupportedLookAndFeelException e) {
-      // handle exception
-      System.out.println("Unsupported feature");
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-    }
-
 
   }
 
@@ -114,10 +105,11 @@ public class GUIController  {
     }
   }
 
-  public int getHeight(){
+  public int getHeight() {
     return height;
   }
-  public int getWidth(){
+
+  public int getWidth() {
     return width;
   }
 
@@ -165,9 +157,9 @@ public class GUIController  {
    * @return The newly transformed mosaic image.
    */
   public int[][][] applyMosaicEffect(int seeds) {
-      System.out.println("Applying mosaic for the image");
-      IImage mosaicImage = new MosaicImage(img, height, width, seeds);
-      img = mosaicImage.storeRGB();
-      return img;
-    }
+    System.out.println("Applying mosaic for the image");
+    IImage mosaicImage = new MosaicImage(img, height, width, seeds);
+    img = mosaicImage.storeRGB();
+    return img;
+  }
 }

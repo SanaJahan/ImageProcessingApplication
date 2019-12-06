@@ -5,11 +5,14 @@ import org.junit.Test;
  */
 public class MainTest {
 
-  @Test (expected = IllegalArgumentException.class)
-  public void mainTest(){
+  /**
+   * test that throws the IllegalArgumentException,
+   * when wrong options are passed.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void mainTest() {
     Main.main(new String[]{"-new_controller"});
   }
-
 
 
 }
