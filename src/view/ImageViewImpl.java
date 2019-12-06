@@ -12,6 +12,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import controller.GUIController;
 import utility.ImageUtil;
 
+/**
+ * Deals with the GUI components to be added to the application.
+ */
 public class ImageViewImpl extends JFrame implements IImageView {
 
   private GUIController controller;
@@ -28,6 +31,9 @@ public class ImageViewImpl extends JFrame implements IImageView {
   private ImageUtil imageUtil = new ImageUtil();
 
 
+  /**
+   * Constructor where all the GUI components are added to the user interface of the application.
+   */
   public ImageViewImpl() {
     super();
     controller = new GUIController();
@@ -144,6 +150,10 @@ public class ImageViewImpl extends JFrame implements IImageView {
 
   }
 
+  /**
+   * Mentions the actions that need to be performed when a particular effect is requested.
+   * @param e
+   */
   @Override
   public void actionPerformed(ActionEvent e) {
     int height = -1;
@@ -158,7 +168,8 @@ public class ImageViewImpl extends JFrame implements IImageView {
         if (retvalue == JFileChooser.APPROVE_OPTION) {
           File file = fchooser.getSelectedFile();
           if (file == null) {
-            JOptionPane.showMessageDialog(new JFrame(), "No image was selected to load", "Dialog",
+            JOptionPane.showMessageDialog(new JFrame(),
+                    "No image was selected to load", "Dialog",
                     JOptionPane.ERROR_MESSAGE);
             break;
           }
@@ -179,7 +190,8 @@ public class ImageViewImpl extends JFrame implements IImageView {
         width = controller.getWidth();
         height = controller.getHeight();
         if (width < 0 || height < 0) {
-          JOptionPane.showMessageDialog(new JFrame(), "Please open an image file to apply the effect", "Dialog",
+          JOptionPane.showMessageDialog(new JFrame(),
+                  "Please open an image file to apply the effect", "Dialog",
                   JOptionPane.ERROR_MESSAGE);
           break;
         }
@@ -190,7 +202,8 @@ public class ImageViewImpl extends JFrame implements IImageView {
         width = controller.getWidth();
         height = controller.getHeight();
         if (width < 0 || height < 0) {
-          JOptionPane.showMessageDialog(new JFrame(), "Please open an image file to apply the effect", "Dialog",
+          JOptionPane.showMessageDialog(new JFrame(),
+                  "Please open an image file to apply the effect", "Dialog",
                   JOptionPane.ERROR_MESSAGE);
           break;
         }
@@ -201,7 +214,8 @@ public class ImageViewImpl extends JFrame implements IImageView {
         width = controller.getWidth();
         height = controller.getHeight();
         if (width < 0 || height < 0) {
-          JOptionPane.showMessageDialog(new JFrame(), "Please open an image file to apply the effect", "Dialog",
+          JOptionPane.showMessageDialog(new JFrame(),
+                  "Please open an image file to apply the effect", "Dialog",
                   JOptionPane.ERROR_MESSAGE);
           break;
         }
@@ -212,7 +226,8 @@ public class ImageViewImpl extends JFrame implements IImageView {
         width = controller.getWidth();
         height = controller.getHeight();
         if (width < 0 || height < 0) {
-          JOptionPane.showMessageDialog(new JFrame(), "Please open an image file to apply the effect", "Dialog",
+          JOptionPane.showMessageDialog(new JFrame(),
+                  "Please open an image file to apply the effect", "Dialog",
                   JOptionPane.ERROR_MESSAGE);
           break;
         }
@@ -223,13 +238,15 @@ public class ImageViewImpl extends JFrame implements IImageView {
         width = controller.getWidth();
         height = controller.getHeight();
         if (width < 0 || height < 0) {
-          JOptionPane.showMessageDialog(new JFrame(), "Please open an image file to apply the effect", "Dialog",
+          JOptionPane.showMessageDialog(new JFrame(),
+                  "Please open an image file to apply the effect", "Dialog",
                   JOptionPane.ERROR_MESSAGE);
           break;
         }
         int seeds = Integer.parseInt(JOptionPane.showInputDialog("Enter seed value"));
         if (seeds < 2) {
-          JOptionPane.showMessageDialog(new JFrame(), "Seeds value should be greater than 1", "Dialog",
+          JOptionPane.showMessageDialog(new JFrame(),
+                  "Seeds value should be greater than 1", "Dialog",
                   JOptionPane.ERROR_MESSAGE);
 
         }
@@ -240,7 +257,8 @@ public class ImageViewImpl extends JFrame implements IImageView {
         width = controller.getWidth();
         height = controller.getHeight();
         if (width < 0 || height < 0) {
-          JOptionPane.showMessageDialog(new JFrame(), "Please open an image file to apply the effect", "Dialog",
+          JOptionPane.showMessageDialog(new JFrame(),
+                  "Please open an image file to apply the effect", "Dialog",
                   JOptionPane.ERROR_MESSAGE);
           break;
         }
@@ -253,8 +271,10 @@ public class ImageViewImpl extends JFrame implements IImageView {
         String widthStr = JOptionPane.showInputDialog("Please enter width");
         width = Integer.parseInt(widthStr);
         height = Integer.parseInt(heightStr);
-        if (width < 0 || height < 0 || !direction.equals("horizontal") && !direction.equals("vertical")) {
-          JOptionPane.showMessageDialog(new JFrame(), "Generation of image failed. Please try again", "Dialog",
+        if (width < 0 || height < 0 || !direction.equals("horizontal")
+                && !direction.equals("vertical")) {
+          JOptionPane.showMessageDialog(new JFrame(),
+                  "Generation of image failed. Please try again", "Dialog",
                   JOptionPane.ERROR_MESSAGE);
           break;
         }
@@ -265,7 +285,8 @@ public class ImageViewImpl extends JFrame implements IImageView {
       case "checkerboard": {
         String squareSize = JOptionPane.showInputDialog("Please enter square size value");
         if (Integer.parseInt(squareSize) < 1) {
-          JOptionPane.showMessageDialog(new JFrame(), "Square size should be greater than 0", "Dialog",
+          JOptionPane.showMessageDialog(new JFrame(),
+                  "Square size should be greater than 0", "Dialog",
                   JOptionPane.ERROR_MESSAGE);
           break;
         }
@@ -281,7 +302,8 @@ public class ImageViewImpl extends JFrame implements IImageView {
         if (retvalue == JFileChooser.APPROVE_OPTION) {
           File f = fchooser.getSelectedFile();
           if (f == null) {
-            JOptionPane.showMessageDialog(new JFrame(), "Failed to save image.Please try again", "Dialog",
+            JOptionPane.showMessageDialog(new JFrame(),
+                    "Failed to save image.Please try again", "Dialog",
                     JOptionPane.ERROR_MESSAGE);
             break;
           }
@@ -297,10 +319,17 @@ public class ImageViewImpl extends JFrame implements IImageView {
     }
   }
 
+  /**
+   * For creating the new image on the UI.
+   * @param rgb Image matrix.
+   * @param width Width of the image.
+   * @param height Height of the image.
+   */
   @Override
   public void drawImage(int[][][] rgb, int width, int height) {
     if (rgb == null) {
-      JOptionPane.showMessageDialog(new JFrame(), "Effect cannot be applied. Please try again", "Dialog",
+      JOptionPane.showMessageDialog(new JFrame(),
+              "Effect cannot be applied. Please try again", "Dialog",
               JOptionPane.ERROR_MESSAGE);
     }
     BufferedImage output = imageUtil.getTransformedImage(rgb, width, height);
