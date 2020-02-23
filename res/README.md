@@ -106,10 +106,7 @@ User can load a file and save an image file.
 Also, user can see the effects being applied to the image.
 User can also generate checkerboard & vibgyor.
 
-<font size = "40"><b>Design Changes</b></font>
-1. removed vibgyor interface
-2. Changed name of main controller to main and took it out of the controller package, since it not exactly a controller but the entry point of the application
-3. changed name of FileReader to ImageUtil
+
 
 
 
